@@ -29,7 +29,32 @@ ul#mainmenu{
     overflow: hidden;
     background-color: #1ad82a;
   }
+  /*position of the tabs*/
+  .left {
+    float: left;
+  }
+  
+.right {
+  float: right;
+}
 
+/* sign up button*/
+  button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 600;
+    margin: 0 10px;
+    width: 200px;
+    padding: 10px 0;
+    transition: 0.4s;
+  }
+  /*button of sign up style*/
+  .signup {
+    color: white;
+    background-color: #37ac33;
+
+  }
   li a {
     display: block;
     color: white;
@@ -38,7 +63,6 @@ ul#mainmenu{
     font-size: 1.5vw;
     text-decoration: none;
   }
-  
   li a:hover {
     background-color: rgb(0, 255, 0);
     
@@ -56,3 +80,40 @@ ul#mainmenu{
     list-style-position: inside;
     white-space: nowrap; */
   }
+  /*search bar*/
+  input {
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10 10px;
+    width: 400px;
+    padding: 12px 20px 12px 20px;
+  }
+
+/*footers for souvenirs pages*/
+  footer {
+    position: fixed;
+    text-align: center;
+    bottom:0;
+    width: 100%;
+    color: white;
+    background-color: #37ac33;  
+    padding: 10px 0;
+    margin-left: -40px;
+   }
+ footer2 {
+  position: fixed;
+  color: white;
+  bottom:36px;
+  width: 100%;
+  text-align: center;
+  background-color: #37ac33;  
+  padding: 10px 0;
+  margin-left: -40px;
+  
+}
+
+
