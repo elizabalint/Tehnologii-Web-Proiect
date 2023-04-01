@@ -12,7 +12,7 @@ body {
 	min-height: 100%;
 	height: 100%;
 	font-family: verdana;
-	background-color: rgb(125, 219, 211);
+	/* background-color: rgb(125, 219, 211); */
 	padding:0;
 	margin:0;
 	background-clip: padding-box;
@@ -27,9 +27,26 @@ ul#mainmenu{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1ad82a;
+    background-color: rgb(8, 42, 233)
   }
-  /*position of the tabs*/
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1vw;
+    font-size: 1.5vw;
+    text-decoration: none;
+    transition: all 500ms;
+  }
+  li a:hover {
+    background-color: rgb(9, 85, 228);
+    font-size:1.7vw;
+    font-size-adjust: 0.5;
+    
+  }
+
+/*position of the tabs*/
   .left {
     float: left;
   }
@@ -37,6 +54,11 @@ ul#mainmenu{
 .right {
   float: right;
 }
+
+.displaycenter {
+  display: inline-block;
+}
+
 
 /* sign up button*/
   button {
@@ -52,34 +74,10 @@ ul#mainmenu{
   /*button of sign up style*/
   .signup {
     color: white;
-    background-color: #37ac33;
+    background-color: rgb(8, 42, 233);
 
   }
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 1vw;
-    font-size: 1.5vw;
-    text-decoration: none;
-  }
-  li a:hover {
-    background-color: rgb(0, 255, 0);
-    
-  }
 
- /* SOUVENIR MENU */
-  
-  ul#souvenirmenu{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-     background-color: #37ac33;  
-    /* text-align: center; 
-    list-style-position: inside;
-    white-space: nowrap; */
-  }
   /*search bar*/
   input {
     width: 100%;
@@ -88,7 +86,7 @@ ul#mainmenu{
     font-size: 16px;
     background-color: white;
     border-radius: 10px;
-    margin: 10 10px;
+    margin: 10px;
     width: 400px;
     padding: 12px 20px 12px 20px;
   }
@@ -100,20 +98,11 @@ ul#mainmenu{
     bottom:0;
     width: 100%;
     color: white;
-    background-color: #37ac33;  
+    background-color: rgb(8, 42, 233);
     padding: 10px 0;
     margin-left: -40px;
    }
- footer2 {
-  position: fixed;
-  color: white;
-  bottom:36px;
-  width: 100%;
-  text-align: center;
-  background-color: #37ac33;  
-  padding: 10px 0;
-  margin-left: -40px;
-  
-}
+
+
 
 
