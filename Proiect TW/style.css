@@ -1,56 +1,55 @@
-
-html, div, img {
-	padding:0;
-	margin:0;
-	background-clip: padding-box;
-	padding-bottom: 0px;
-	padding-top: 0px;
-	overflow: auto;
+html,
+div,
+img {
+  padding: 0;
+  margin: 0;
+  background-clip: padding-box;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  overflow: auto;
 }
 
 body {
-	min-height: 100%;
-	height: 100%;
-	font-family: verdana;
-	/* background-color: rgb(125, 219, 211); */
-	padding:0;
-	margin:0;
-	background-clip: padding-box;
-	padding-bottom: 0px;
-	padding-top: 0px;
-	overflow: auto;
+  background-image: linear-gradient(123deg, rgb(178, 255, 213) 15%, rgb(9, 85, 228) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Serif";
+
 }
 
 /* MAIN MENU */
-ul#mainmenu{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(8, 42, 233)
-  }
+ul#mainmenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(8, 42, 233)
+}
 
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 1vw;
-    font-size: 1.5vw;
-    text-decoration: none;
-    transition: all 500ms;
-  }
-  li a:hover {
-    background-color: rgb(9, 85, 228);
-    font-size:1.7vw;
-    font-size-adjust: 0.5;
-    
-  }
+li a {
+  position: static;
+  display: flex;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 1.7em;
+  text-decoration: none;
+  transition: all 500ms;
+}
+
+li a:hover {
+  background-color: rgb(9, 85, 228);
+  font-size: 1.9em;
+  font-size-adjust: 0.5;
+
+}
 
 /*position of the tabs*/
-  .left {
-    float: left;
-  }
-  
+.left {
+  float: left;
+}
+
 .right {
   float: right;
 }
@@ -61,48 +60,194 @@ ul#mainmenu{
 
 
 /* sign up button*/
-  button {
-    cursor: pointer;
-    border: 0;
-    border-radius: 4px;
-    font-weight: 600;
-    margin: 0 10px;
-    width: 200px;
-    padding: 10px 0;
-    transition: 0.4s;
-  }
-  /*button of sign up style*/
-  .signup {
-    color: white;
-    background-color: rgb(8, 42, 233);
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 200px;
+  padding: 10px 0;
+  transition: 0.4s;
+}
 
-  }
+/*button of sign up style*/
+.signup {
+  color: white;
+  background-color: rgb(8, 42, 233);
 
-  /*search bar*/
-  input {
-    width: 100%;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    border-radius: 10px;
-    margin: 10px;
-    width: 400px;
-    padding: 12px 20px 12px 20px;
-  }
+}
+
+/*search bar*/
+input {
+  width: 100%;
+  border: 2px solid rgb(173, 206, 188);
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+  width: 400px;
+  padding: 12px 20px 12px 20px;
+}
 
 /*footers for souvenirs pages*/
-  footer {
-    position: fixed;
-    text-align: center;
-    bottom:0;
-    width: 100%;
-    color: white;
-    background-color: rgb(8, 42, 233);
-    padding: 10px 0;
-    margin-left: -40px;
-   }
+footer {
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  background-color: rgb(8, 42, 233);
+  padding: 10px 0;
+  margin-left: -40px;
+}
+
+/* Home page */
+
+.box_menu {
+  margin: 1% auto;
+  width: 83%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  box-shadow: 0 0 23px 7px  rgba(38, 10, 75, 0.295);
+}
+
+/* left side */
+
+.box_menu .left {
+  color: white;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("Images/evantai.jpg");
+}
+
+.box_menu .left .overlay {
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  background: rgba(31, 131, 126, 0.473);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.box_menu .left .overlay h1 {
+  font-size: 10vmax;
+  font-weight: 1000;
+  margin: 30px 20px; 
+  line-height: 1; 
+  
+}
+
+.box_menu .left .overlay p {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 30px 20px; 
+  line-height: 1; 
+}
 
 
+/* right side */
+
+.box_menu .right {
+  padding: 38px;
+  overflow: hidden;
+}
+
+.box_menu .right h5 {
+  font-size: 6vmax;
+  line-height: 0;
+  color: black;
+}
+
+.box_menu .right p {
+  font-size: 17px;
+  color: black;
+}
+
+.box_menu .right i {
+  font-weight: 800;
+  color: black;
+}
+
+
+.box_menu .right input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  margin-left: -8px;
+  font-size: 17px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgb(75, 9, 228);
+} 
+
+.box_menu .right .inputs {
+  overflow: hidden;
+} 
+
+
+.box_menu .right button {
+  color: white;
+  font-size: 16px;
+  padding: 12px 35px;
+  border-radius: 50px;
+  display: inline-block;
+  border: 0;
+  outline: 0;
+  box-shadow: 0px 4px 20px 0px rgba(38, 10, 75, 0.295);
+  background-image: linear-gradient(123deg, rgb(240, 178, 255) 15%, rgb(75, 9, 228) 100%);
+}
+
+
+
+/* Checkbox - remember me*/
+
+ label {
+  display: block;
+  position: relative;
+  margin-left: 30px;
+}
+
+label::before {
+  
+  content: '\2713';
+  position: absolute;
+  font-family: "Serif";
+  font-size: 16px;
+  height: 20px;
+  background: transparent;
+  border: 3px solid rgb(75, 9, 228);
+  border-radius: 2px;
+  color: transparent;
+  left: -30px;
+  transition: all 0.2s linear;
+}
+
+label:hover::before {
+  font-family: "Serif";
+  content: '\2713';
+  color: white;
+  cursor: pointer;
+  background: rgb(75, 9, 228)
+}
+
+label input[type="checkbox"] {
+  display:none;
+} 
+
+ label span.text-checkbox {
+  font-size:20px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+
+} 
 
 

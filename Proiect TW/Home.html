@@ -1,51 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Souvenir Shack</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Souvenir Shack</title>
+  <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<!-- Menu -->
+  <!-- Menu -->
 
-</div>
+  <div class="box_menu">
 
-<ul id="mainmenu">
-  <li class="right"><a href="Sign_in.html">SIGN IN</a></li>
-</ul>
+    <!-- Description of site (left side) -->
+    <div class="left">
+      <div class="overlay">
+        <h1>Souvenir Shack</h1>
+        <p>Souvenir Shack is a site where you can find many souvenirs for you, your family and friends.</p>
+      </div>
+    </div>
 
-</div>
+    <!-- Login Menu (right side) -->
+    <div class="right">
 
-<!-- Sign up (right side of page)-->
+      <!-- Don't have account option-->
+      <h5>Sign in</h5>
+      <p>You don't have an account? <a href="Sign_up.html">Create Your Account</a> and start searching for souvenirs. &nbsp </p>
 
-<form action="General.html" method="POST">
+      <!-- Inputs Menu -->
+      <div class="inputs">
+        <input type="text" placeholder="Enter Username">
+        <br>
+        <input type="password" placeholder="Enter Password">
+      </div>
+
+      <br>
+
+      <!-- Remember me option-->
+      <div>
+        <label>
+          <input type="checkbox" name="remembered" checked />
+          <span class="text-checkbox">Remember me</span>
+        </label>
   
-    <label for="username">Username:</label>
-    <input type="text" placeholder="Enter Username" name="username" id="username"> <br><br>
-   
-    <label for="password">Password:</label>
-    <input type="password" placeholder="Enter Password" name="password" id="password"> <br><br>
-    
-    <label for="password_confirmation">Password confirmation:</label>
-    <input type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation"> <br><br>
+        <!-- to be seen if this will be made -->
+        <p><i>Forgot password?</i></p> 
 
-    <button type="signup" class="signup">Sign up</button>
-  </form>
+      </div>
+       
+      <!-- Login button -->
+      <a href="General.html"> 
+      <br> <button> Login </button>
+      </a>
 
+    </div>
 
-
-<!-- If succesfully signed up then autodirect to General page, else error -->
-
-<!-- Short description of page (left of page) -->
+  </div>
 
 
-<!-- (optional) To add : LOGO, edit scrollbar   -->
+  <!-- If succesfully signed up then autodirect to General page, else error -->
+
+
+  <!-- Short description of page (left of page) -->
+
+
+  <!-- (optional) To add : LOGO, edit scrollbar   -->
 
 
 
 </body>
+
 </html>
