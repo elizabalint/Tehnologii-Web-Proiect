@@ -1,0 +1,11 @@
+1. Utilizatori
+ID_user, Username , Password 
+
+2. Countries
+ID_country, Name_country
+
+3. Visited countries
+ID_country, ID_user , Date_when_visited ( day/month/year )
+
+4. Souvenirs
+ID_souvenir, ID_country, Date_when_souvenir_is_popular ( one for start one for end of period | month ) , Name_souvenir
