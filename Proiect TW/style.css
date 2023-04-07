@@ -35,16 +35,40 @@ body {
 }
 
 /*search bar*/
-input {
-  width: 100%;
-  border: 2px solid rgb(173, 206, 188);
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  border-radius: 10px;
-  margin: 10px;
-  width: 400px;
-  padding: 12px 20px 12px 20px;
+.container{
+  width: 30em;
+  padding: 1em;
+  align-items: start;
+  justify-content: start;
+  display: flex;
+}
+.search-bar{
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  border-radius: 6em;
+  font-size: 0.5em;
+  color: #cac7ff;
+}
+.search-bar input{
+  background: transparent;
+  border: 0;
+  flex: 1 ;
+  outline: none;
+  padding: 0.6em 2em;
+  font-size: 2.5em;
+  color: #cac7ff;
+}
+.search-bar button img{
+  width: 1.5em;
+}
+.search-bar button{
+  border:none;
+  border-radius: 10em;
+  width: 3em;
+  height: 3em;
+  background: #58629b;
+  margin-top: 0.2em;
 }
 
 /*footers for souvenirs pages*/
@@ -383,3 +407,53 @@ li a:hover {
   display: block;
 }
 
+
+/*lists of souvenirs*/
+.souvenir ol {
+	position:relative;
+  text-align: center;
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+.souvenir li {
+	padding: 0.5em 1.5em 1em;
+	border-radius: 4em;
+	background: #6547db;
+  color: antiquewhite;
+}
+
+.souvenir li + li {
+	margin-top: 1em;
+}
+
+.souvenir ::marker {
+	font-size: 2em;
+  color: transparent;
+}
+.souvenir h1{
+  font-size: 4em;
+  padding: 0em;
+  color: blue;
+  margin: 0.4em;
+  font-family: MV Boli;
+  text-align: center;
+}
+
+/*.souvenir p{
+  margin: 0.2em;
+  width: 10em;
+  height: 2.5em;
+  background: rgb(142, 66, 218);    
+  transform: skewX(-20deg);
+  border-radius: 4em;
+  color:bisque;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  position:relative;
+  text-align: center;
+  margin-right: -15%;
+  margin-left: -15%;
+}
+*/
