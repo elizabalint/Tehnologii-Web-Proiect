@@ -15,35 +15,11 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: "Serif";
+  margin:0px;
+  padding:0px;
 
 }
 
-/* MAIN MENU */
-ul#mainmenu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: rgb(8, 42, 233)
-}
-
-li a {
-  position: static;
-  display: flex;
-  color: white;
-  text-align: center;
-  padding: 1em;
-  font-size: 1.7em;
-  text-decoration: none;
-  transition: all 500ms;
-}
-
-li a:hover {
-  background-color: rgb(9, 85, 228);
-  font-size: 1.9em;
-  font-size-adjust: 0.5;
-
-}
 
 /*position of the tabs*/
 .left {
@@ -56,26 +32,6 @@ li a:hover {
 
 .displaycenter {
   display: inline-block;
-}
-
-
-/* sign up button*/
-button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 4px;
-  font-weight: 600;
-  margin: 0 10px;
-  width: 200px;
-  padding: 10px 0;
-  transition: 0.4s;
-}
-
-/*button of sign up style*/
-.signup {
-  color: white;
-  background-color: rgb(8, 42, 233);
-
 }
 
 /*search bar*/
@@ -163,7 +119,7 @@ footer {
 
 .box_menu .right h5 {
   font-size: 6vmax;
-  line-height: 0;
+  line-height: 1;
   color: black;
 }
 
@@ -207,6 +163,17 @@ footer {
 }
 
 
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 200px;
+  padding: 10px 0;
+  transition: 0.4s;
+}
+
 
 /* Checkbox - remember me*/
 
@@ -214,6 +181,7 @@ footer {
   display: block;
   position: relative;
   margin-left: 30px;
+  width:40%;
 }
 
 label::before {
@@ -274,7 +242,7 @@ label input[type="checkbox"] {
 
 .box_menu_2 .container h5 {
   font-size: 5vmax;
-  line-height: 0;
+  line-height: 1;
   color: black;
 
 }
@@ -326,5 +294,92 @@ label input[type="checkbox"] {
   margin-left: auto;
   margin-right: auto;
   width: 85%;
+}
+
+/* MAIN MENU */
+ul#mainmenu {
+  height: auto;
+  width: auto;
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-image: linear-gradient(123deg, rgb(150, 150, 197) 15%, rgb(134, 132, 221) 100%);
+  align-items: stretch;
+  float:none;
+}
+
+li a {
+  position: static;
+  display: flex;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 1.7em;
+  text-decoration: none;
+  transition: all 500ms;
+}
+
+li a:hover {
+  background-image: linear-gradient(123deg, rgb(111, 111, 146) 15%, rgb(74, 73, 105) 100%);
+  font-size: 1.9em;
+  font-size-adjust: 0.5;
+
+}
+
+.menu_image{
+  padding: 1em;
+  object-fit: fill;
+  height: auto;
+  width: auto;
+  max-height: 3.6em;
+  max-width: 4em;
+  
+}
+
+/* For dropdown */
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+
+  position: static;
+  display: flex;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 1.7em;
+  text-decoration: none;
+  transition: all 500ms;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: inherit;
+  min-width: 2em;
+  z-index: auto;
+}
+
+.dropdown-content a {
+  float: none;
+  color: white;
+  padding: 1em;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
