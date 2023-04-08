@@ -35,7 +35,7 @@ body {
 }
 
 /*search bar*/
-.container{
+.container_search_bar{
   width: 30em;
   padding: 1em;
   align-items: start;
