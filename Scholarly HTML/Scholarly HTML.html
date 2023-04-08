@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- <meta charset="UTF-8"> -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Scholarly HTML</title>
+  <link rel="stylesheet" href="Scholarly_HTML_files/scholarly.min.css">
+
+</head>
+
+<body>
+  <header>
+
+    <h1>Souvenir Shack</h1>
+  </header>
+
+  <!-- Content Info -->
+  <div role="contentinfo">
+
+    <ol role="directory">
+
+      <!-- Content 1 -->
+      <li><a href="#introduction"><span>1. </span>Introduction</a>
+
+        <ol role="directory">
+          <li><a href="#purpose"><span>1.1 </span>Purpose</a></li>
+          <li><a href="#conventions"><span>1.2 </span>Document Conventions</a></li>
+          <li><a href="#intended_audience"><span>1.3 </span>Intended Audience and Reading Suggestions</a></li>
+          <li><a href="#product_scope"><span>1.4 </span>Product Scope</a></li>
+          <li><a href="#references"><span>1.5 </span>References</a></li>
+        </ol>
+
+      </li>
+
+      <!-- Content 2 -->
+      <li><a href="#overall_description"><span>2. </span>Overall Description</a>
+
+        <ol role="directory">
+          <li><a href="#product_perspective"><span>2.1 </span>Product Perspective</a></li>
+          <li><a href="#product_functions"><span>2.2 </span>Product Functions</a></li>
+          <li><a href="#user_classes_characteristics"><span>2.3 </span>User Classes and Characteristics</a></li>
+          <li><a href="#operating_environment"><span>2.4 </span>Operating Environment</a></li>
+          <li><a href="#design_implementation_constraints"><span>2.5 </span>Design and Implementation Constraints</a>
+          </li>
+        </ol>
+
+      </li>
+
+      <!-- Content 3 -->
+      <li><a href="#external__interface_requirements"><span>3. </span>External Interface Requirements</a>
+
+        <ol role="directory">
+          <li><a href="#user_interfaces"><span>3.1 </span>User Interfaces</a></li>
+          <li><a href="#hardware_interfaces"><span>3.2 </span>Hardware Interfaces</a></li>
+          <li><a href="#software_interfaces"><span>3.3 </span>Software Interfaces</a></li>
+          <li><a href="#communications_interfaces"><span>3.4 </span>Communications Interfaces</a></li>
+        </ol>
+
+      </li>
+
+      <!-- Content 4 -->
+      <li><a href="#system_features"><span>4. </span>System Features</a>
+        <ol role="directory">
+          <li><a href="#sign_in"><span>4.1 </span>Sign in page</a></li>
+          <li><a href="#sign_up"><span>4.2 </span>Sign up page</a></li>
+          <li><a href="#info"><span>4.3 </span>Info page</a></li>
+          <li><a href="#map"><span>4.4 </span>Map page</a></li>
+          <li><a href="#souvenirs_info"><span>4.5 </span>Souvenirs general info</a>
+          <li><a href="#souvenirs_personal"><span>4.6 </span>Souvenirs personal recommandation</a></li>
+          <li><a href="#souvenirs_general"><span>4.7 </span>Souvenirs general recommandation</a>
+          </li>
+        </ol>
+      </li>
+
+      <!-- Content 5 -->
+      <li><a href="#nonfunctional_requirements"><span>5. </span>Other Nonfunctional Requirements</a>
+        <ol role="directory">
+          <li><a href="#safety_requirements"><span>5.1 </span>Safety Requirements</a></li>
+          <li><a href="#security_requirements"><span>5.2 </span>Security Requirements</a></li>
+          <li><a href="#software_quality"><span>5.3 </span>Software Quality Attributes</a></li>
+        </ol>
+      </li>
+
+    </ol>
+
+    <!-- Authors -->
+    <h2 id="authors_credentials">Authors</h2>
+    <ol role="link">
+      <li property="schema:author" typeof="sa:ContributorRole">
+        <a property="schema:author" href="#authors_credentials" typeof="schema:Person">
+          <span property="schema:givenName">Eliza Iuliana</span>
+          <span property="schema:familyName">Balint</span>
+        </a>
+        <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+          <a property="schema:email" href="mailto:elizabalint2002@gmail.com" title="corresponding author">&#9993;</a>
+        </sup>
+      </li>
+
+      <li property="schema:author" typeof="sa:ContributorRole">
+        <a property="schema:author" href="#authors_credentials" typeof="schema:Person">
+          <span property="schema:givenName">Vlad Rovin</span>
+          <span property="schema:familyName">Ignat</span>
+        </a>
+        <sup property="sa:roleContactPoint" typeof="schema:ContactPoint">
+          <a property="schema:email" href="mailto:ignatrovino12@gmail.com" title="corresponding author">&#9993;</a>
+        </sup>
+      </li>
+    </ol>
+
+  </div>
+
+
+  <!-- Section 1 -->
+
+  <section id="introduction" role="doc-introduction">
+
+    <h2><span>1. </span>Introduction</h2>
+
+    <h3 id="purpose"><span>1.1 </span>Purpose</h3>
+    <p>
+      The purpose of this document is to present in detail the web application Souvenir Shack based on the project SORE. 
+      This page will explain the scope and features of the software,as well as it's interfaces, functionalities and constraints.
+      Users of this web site are free to use this document as source of information.
+    </p>
+
+    <h3 id="conventions"><span>1.2 </span>Document Conventions</h3>
+    <p>
+      This document was created based on the Scholarly HTML document format and IEEE template for System Requirement Specification Documents.
+    </p>
+
+    <h3 id="intended_audience"><span>1.3 </span>Intended Audience and Reading Suggestions</h3>
+    <p>
+      The users intended to use this web application are any users who wish to use the site for informing about the perfect souvenirs and gifts for their co-workers,friends and family.
+    </p>
+
+    <h3 id="product_scope"><span>1.4 </span>Product Scope </h3>
+    <p>
+    Souvenir Shack has been developed for the purpose of helping the users find the most fitting souvenirs for the people in their life, 
+    depending on where they traveled or want to travel.
+    </p>
+
+    <h3 id="references"><span>1.5 </span>References </h3>
+    <p>
+      In order to create the site we documented on CSS and HTML related sites which are shown below:
+    </p>
+
+    <ol role="list">
+      <li><a href="https://www.w3schools.com/">W3schools</a></li>
+      <li><a href="https://jigsaw.w3.org/">JIGSAW</a></li>
+      <li><a href="https://github.com/rick4470/IEEE-SRS-Tempate#other-requirements">IEEE-Tempate</a></li>
+      <li><a href="https://w3c.github.io/scholarly-html/#references">Scholarly HTML</a></li>
+
+    </ol>
+
+  </section>
+
+
+  <!-- Section 2 -->
+  <section id="overall_description" role="doc-introduction">
+
+    <h2><span>2. </span>Overall Description</h2>
+
+    <h3 id="product_perspective"><span>2.1 </span>Product Perspective</h3>
+    <p>
+     Souvenir Shack offers a wide range of souvenirs from different countries with different cultures.
+     The site is easy to use and presents an unique concept that is very hard to find online for a web site.
+    </p>
+
+    <h3 id="product_functions"><span>2.2 </span>Product Functions</h3>
+    <p>
+
+    </p>
+
+    <h3 id="user_classes_characteristics"><span>2.3 </span>User Classes and Characteristics</h3>
+    <p>
+
+    </p>
+    <h3 id="operating_environment"><span>2.4 </span>Operating Environment </h3>
+    <p>
+
+    </p>
+
+    <h3 id="design_implementation_constraints"><span>2.5 </span>Design and Implementation Constraints </h3>
+    <p>
+
+    </p>
+
+  </section>
+
+
+  <!-- Section 3 -->
+  <section id="external__interface_requirements" role="doc-introduction">
+
+    <h2><span>3. </span>External Interface Requirements</h2>
+     
+
+    <h3 id="user_interfaces"><span>3.1 </span>User Interfaces</h3>
+
+      <figure>
+        <figcaption>Souvenir Shack's Sign in page</figcaption>
+        <img src="Screenshots/sign_in.png " alt="sign_in_screenshot" width="120%">
+      </figure>
+
+      <figure>
+        <figcaption>Souvenir Shack's Sign up page</figcaption>
+        <img src="Screenshots/sign_up.png " alt="sign_up_screenshot" width="120%">
+      </figure>
+      <figure>
+        <figcaption>Souvenir Shack's Info page</figcaption>
+        <img src="" alt="info_screenshot" width="120%">
+      </figure>
+
+      <figure>
+        <figcaption>Souvenir Shack's Map page</figcaption>
+        <img src="" alt="map_screenshot" width="120%">
+      </figure>
+      <figure>
+        <figcaption>Souvenir Shack's Souvenirs general info page</figcaption>
+        <img src="" alt="souvenirs_info_screenshot" width="120%">
+      </figure>
+
+      <figure>
+        <figcaption>Souvenir Shack's Souvenirs personal recommandation page</figcaption>
+        <img src="" alt="souvenirs_personal_screenshot" width="120%">
+      </figure>
+      <figure>
+        <figcaption>Souvenir Shack's Souvenirs general recommandation page</figcaption>
+        <img src="" alt="souvenirs_general_screenshot" width="120%">
+      </figure>
+
+   
+
+    <h3 id="hardware_interfaces"><span>3.2 </span>Hardware Interfaces </h3>
+    <p>
+
+    </p>
+
+    <h3 id="software_interfaces"><span>3.3 </span>Software Interfaces</h3>
+    <p>
+
+    </p>
+    <h3 id="communications_interfaces"><span>3.4 </span>Communications Interfaces </h3>
+    <p>
+
+    </p>
+
+  </section>
+
+
+  <!-- Section 4 -->
+  <section id="system_features" role="doc-introduction">
+
+    <h2><span>4. </span>System Features</h2>
+
+    <h3 id="sign_in"><span>4.1 </span>Sign in page</h3>
+    <p>
+
+    </p>
+
+    <h3 id="sign_up"><span>4.2 </span>Sign up page</h3>
+    <p>
+
+    </p>
+
+    <h3 id="info"><span>4.3 </span>Info page</h3>
+    <p>
+
+    </p>
+    <h3 id="map"><span>4.4 </span>Map page</h3>
+    <p>
+
+    </p>
+
+    <h3 id="souvenirs_info"><span>4.5 </span>Souvenirs general info </h3>
+    <p>
+
+    </p>
+
+    <h3 id="souvenirs_personal"><span>4.6 </span>Souvenirs personal recommandation</h3>
+    <p>
+
+    </p>
+
+    <h3 id="souvenirs_general"><span>4.7 </span>Souvenirs general recommandation</h3>
+    <p>
+
+  </section>
+
+
+  <!-- Section 5 -->
+  <section id="nonfunctional_requirements" role="doc-introduction">
+
+    <h2><span>5. </span>Other Nonfunctional Requirements</h2>
+
+    <h3 id="safety_requirements"><span>5.1 </span>Safety Requirements</h3>
+    <p>
+
+    </p>
+
+    <h3 id="security_requirements"><span>5.2 </span>Security Requirements </h3>
+    <p>
+
+    </p>
+
+    <h3 id="software_quality"><span>5.3 </span>Software Quality Attributes</h3>
+    <p>
+
+  </section>
+
+
+</body>
+
+</html>
