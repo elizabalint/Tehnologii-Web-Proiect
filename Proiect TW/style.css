@@ -14,7 +14,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: "Serif";
+  font-family:sans-serif;
   margin:0px;
   padding:0px;
 
@@ -246,3 +246,84 @@ li a:hover {
   margin-left: -15%;
 }
 */
+
+/* Text container */
+
+.container_centered{
+  position: static;
+  margin: auto;
+  padding: 1em;
+  width: 63%;
+  justify-content:center;
+  word-wrap: break-word;
+  color:black;
+  overflow: hidden;
+}
+
+.container_centered p {
+  text-align:justify;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0;
+  padding : 0;
+  line-height: 1;
+  margin-bottom: 25px;
+
+}
+
+/* Subtitle */
+.container_centered h5{
+  font-size: 40px;
+  font-weight: 600;
+  margin:0;
+  margin-bottom:50px;
+  padding:0;
+  line-height: 1; 
+  text-align: center;
+  
+}
+
+/* Title */
+.container_centered h6{
+  font-size: 100px;
+  text-align: center;
+  /* font-family:monospace; */
+  font-weight: 800;
+  margin:auto;
+  margin-bottom:25px;
+  margin-top:30px;
+  padding:0;
+  line-height: 1;  
+  color:rgb(75, 9, 228);
+  background-image: linear-gradient(123deg, rgb(240, 178, 255) 15%, rgb(75, 9, 228) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent; 
+  -webkit-text-stroke: 2px black;
+  
+}
+
+.container_centered i{
+  font-size: 30px;
+  font-weight: 600;
+  margin:0;
+  margin-bottom:25px;
+  padding:0;
+  line-height: 1; 
+ 
+}
+
+.container_centered img{
+  border-radius: 10px;
+  max-width: 100%;
+  width:80%;
+  height: auto;
+  margin-bottom:45px;
+  margin-top:45px;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  filter: drop-shadow(2px 2px 2.5px rgb(25, 90, 187));
+}
