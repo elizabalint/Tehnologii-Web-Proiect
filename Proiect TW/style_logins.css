@@ -92,7 +92,7 @@ body {
 
 .box_menu .right h5 {
   font-size: 6vmax;
-  line-height: 0;
+  line-height: 1;
   color: black;
 }
 
@@ -184,7 +184,7 @@ label input[type="checkbox"] {
 
 .box_menu_2 {
   margin: 6% auto;
-  width: 50%;
+  width: 60%;
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -203,7 +203,7 @@ label input[type="checkbox"] {
 
 .box_menu_2 .container h5 {
   font-size: 5vmax;
-  line-height: 0;
+  line-height: 1;
   color: black;
 
 }

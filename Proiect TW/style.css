@@ -36,14 +36,13 @@ body {
 
 /*search bar*/
 .container_search_bar{
-  width: 30em;
   padding: 1em;
-  align-items: start;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
   display: flex;
 }
 .search-bar{
-  max-width: 100%;
+  max-width: 160%;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   border-radius: 6em;
@@ -68,7 +67,8 @@ body {
   width: 3em;
   height: 3em;
   background: #58629b;
-  margin-top: 0.2em;
+  margin-top: 0.3em;
+  margin-right: 0.4em;
 }
 
 /*footers for souvenirs pages*/
@@ -151,7 +151,7 @@ li a:hover {
   transition: all 500ms;
 }
 
-.dropdown .dropbtn:hover {
+.dropdown .dropbtn:active {
   background-image: linear-gradient(123deg, rgb(111, 111, 146) 15%, rgb(74, 73, 105) 100%);
   font-size: 1.9em;
   font-size-adjust: 0.5;
@@ -198,54 +198,37 @@ li a:hover {
 
 
 /*lists of souvenirs*/
-.souvenir ol {
-	position:relative;
-  text-align: center;
-  margin-right: 25%;
+.souvenir table {
+  font-family: arial, sans-serif;
+  width: 50%;
   margin-left: 25%;
 }
-
-.souvenir li {
-	padding: 0.5em 1.5em 1em;
-	border-radius: 4em;
-	background: #6547db;
+.souvenir td {
+  text-align: left;
+  padding: 8px;
+  background: #6547db;
   color: antiquewhite;
+  padding: 0.5em 1.5em 1em;
+  text-align: center;
+  font-size: medium;
 }
-
-.souvenir li + li {
-	margin-top: 1em;
-}
-
-.souvenir ::marker {
-	font-size: 2em;
-  color: transparent;
+.souvenir th {
+  font-size:larger;
+  padding: 8px;
+  background: #6547db;
+  color: antiquewhite;
+  padding: 0.5em 1.5em 1em;
+  text-align: center;
 }
 .souvenir h1{
   font-size: 4em;
   padding: 0em;
   color: blue;
   margin: 0.4em;
-  font-family: MV Boli;
+  font-family: MV_Boli;
   text-align: center;
 }
 
-/*.souvenir p{
-  margin: 0.2em;
-  width: 10em;
-  height: 2.5em;
-  background: rgb(142, 66, 218);    
-  transform: skewX(-20deg);
-  border-radius: 4em;
-  color:bisque;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  position:relative;
-  text-align: center;
-  margin-right: -15%;
-  margin-left: -15%;
-}
-*/
 
 
 /* Text container */
