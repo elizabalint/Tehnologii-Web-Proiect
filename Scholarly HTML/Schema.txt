@@ -1,8 +1,0 @@
-authors
-
-1. Introduction 
-2. General Description /Functionalities ( whole project and each page )
-3. Interfaces ( 1. screenshots of pages 2. database 3. api?)
-4. Functional requirments/ System features ( explain what the pages do)
-5. Nonfunctional requirments ( safety/ security/ software quality attributes)
-6. References
