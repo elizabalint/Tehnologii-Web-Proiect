@@ -70,6 +70,7 @@ body {
   font-weight: 1000;
   margin: 30px 20px; 
   line-height: 1; 
+  text-shadow:2px 2px 2px black;
   
 }
 
@@ -78,6 +79,7 @@ body {
   font-weight: 500;
   margin: 30px 20px; 
   line-height: 1; 
+  text-shadow:1px 1px 1px black;
 }
 
 
@@ -140,6 +142,7 @@ body {
   display: block;
   position: relative;
   margin-left: 30px;
+  width:35%;
 }
 
 label::before {
@@ -149,7 +152,7 @@ label::before {
   font-family: "Serif";
   font-size: 16px;
   height: 20px;
-  background: transparent;
+  /* background: transparent; */
   border: 3px solid rgb(75, 9, 228);
   border-radius: 2px;
   color: transparent;
@@ -174,7 +177,6 @@ label input[type="checkbox"] {
   cursor: pointer;
   position: relative;
   display: inline-block;
-
 } 
 
 
