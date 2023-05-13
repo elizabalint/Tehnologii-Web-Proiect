@@ -28,9 +28,8 @@ public class Work_with_database {
 ////            //System.out.println(c);
 ////            //work_countries.create(c.getShort_name(),c.getName(), c.getContinent(), c.getRegion(), con);
 ////            }
-
           
-          work_countries.delete("1", con);
+          //work_countries.delete("1", con);
                     
             con.commit();
             con.close();
