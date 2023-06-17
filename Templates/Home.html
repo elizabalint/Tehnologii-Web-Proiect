@@ -33,11 +33,14 @@
       <p>You don't have an account? <a href="Sign_up.html">Create Your Account</a> and start searching for souvenirs.
       </p>
 
+      <!-- action="General.html" method="POST"-->
+      <form  class="login_form" id="loginForm"> 
+
       <!-- Inputs Menu -->
       <div class="inputs">
-        <input type="text" placeholder="Enter Username">
+        <input type="text" placeholder="Enter Username" name="username">
         <br>
-        <input type="password" placeholder="Enter Password">
+        <input type="password" placeholder="Enter Password" name="password">
       </div>
 
       <br>
@@ -45,7 +48,7 @@
       <!-- Remember me option-->
       <div>
         <label>
-          <input type="checkbox" name="remembered" checked>
+          <input type="checkbox"  name="remembered" >
           <span class="text-checkbox">Remember me</span>
         </label>
 
@@ -55,7 +58,7 @@
       </div>
 
       <!-- Login button -->
-      <form action="General.html">
+      <!-- <form action="General.html" method="POST"> -->
         <br> <button type="submit"> Login </button>
       </form>
 
@@ -68,7 +71,7 @@
 
   <!-- (optional) To add : LOGO, edit scrollbar   -->
 
-
+  <script src="API/login.js"></script>
 
 </body>
 
