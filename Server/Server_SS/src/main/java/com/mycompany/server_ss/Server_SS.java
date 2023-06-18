@@ -27,6 +27,7 @@ public class Server_SS {
         var u = new UsersDAO();
         //u.create("Rovin", "parola_Rovin", con);
        //System.out.print( u.findPassword("Vlad", con));
+       
         
         con.commit();
         con.close();

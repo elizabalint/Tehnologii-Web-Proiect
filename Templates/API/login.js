@@ -16,7 +16,7 @@ if(loginForm) {
     })
       .then(response => response.json())
       .then(data => {
-        // console.log(data); // Process the response data
+
 
         if (data.success) {
             // If login was successful
@@ -39,4 +39,5 @@ if(loginForm) {
   });
 
 }
+
 

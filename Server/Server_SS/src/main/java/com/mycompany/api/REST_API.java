@@ -13,9 +13,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -27,6 +24,7 @@ public class REST_API {
         HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
 
         server.createContext("/api/login", (HttpHandler) new LoginHandler());
+        
 
         server.start();
         System.out.println("Server started on port 8081");
@@ -51,13 +49,14 @@ public class REST_API {
                 StringBuilder usernameBody = new StringBuilder();
                 StringBuilder passwordBody = new StringBuilder();
                 StringBuilder rememberedBody = new StringBuilder();
+                
                 // StringBuilder requestBody = new StringBuilder();
                 int line_number = 0;
               
                 //Extract the data
                 while ((line = br.readLine()) != null) {
                     line_number++;
-                    //requestBody.append(line +"\n" + "final" + "\n");
+                    //requestBody.append(line);
                     if (line_number == 4) {
                         usernameBody.append(line);
                     }
@@ -72,6 +71,7 @@ public class REST_API {
                 br.close();
 
                 // String request = requestBody.toString();
+                 
                 String username = usernameBody.toString();
                 String password = passwordBody.toString();
                 if (rememberedBody.isEmpty()) {
@@ -80,6 +80,7 @@ public class REST_API {
                 String remembered = rememberedBody.toString();
 
                 System.out.println(username + " " + password + " " + remembered);
+               
                 
                 // Verify login credentials
                 
