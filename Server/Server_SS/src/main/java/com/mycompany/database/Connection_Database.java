@@ -5,8 +5,8 @@
 package com.mycompany.database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.commons.dbcp.BasicDataSource;
 
 /**
  *
@@ -14,30 +14,25 @@ import java.sql.SQLException;
  */
 public class Connection_Database {
 
-    private static final String URL
-            = "jdbc:sqlite:../../Database/Database.db";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "password";
-    private static Connection connection = null;
+    private final static String DB_URL = "jdbc:sqlite:../../Database/Database.db";
+    private final static String USER = "username";
+    private final static String PASSWORD = "password";
+    private static BasicDataSource basicDS;
 
-    private Connection_Database() {
-    }
-
-    public static Connection getConnection() {
-        return connection;
-    }
-
-    public static void createConnection() {
-        try {
-            connection = DriverManager.getConnection(URL);
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.err.println(e);
+    public static Connection getConnection() throws SQLException {
+        if(basicDS == null){
+            basicDS = new BasicDataSource();
+            basicDS.setUrl(DB_URL);
+            basicDS.setUsername(USER);
+            basicDS.setPassword(PASSWORD);
+            basicDS.setInitialSize(5);
+            basicDS.setMaxActive(10);
+            basicDS.setDefaultAutoCommit(false);
         }
+        return basicDS.getConnection();
     }
-
-    public static void closeConnection() throws SQLException {
-        connection.close();
-    }
+    
+    private Connection_Database(){}
+  
 
 }

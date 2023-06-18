@@ -9,47 +9,76 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import com.mycompany.objects.*;
 
-/**
- *
- * @author ignat
- */
 public class UsersDAO {
-    
-     public void create(String username, String password, Connection con) throws SQLException {
-      
-        try (PreparedStatement pstmt = con.prepareStatement(
-                "insert into users (username,password) values (?,?)")) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.executeUpdate();
+
+    public void create(String username, String password) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+            try (PreparedStatement pstmt = con.prepareStatement(
+                    "insert into users (username,password) values (?,?)")) {
+                pstmt.setString(1, username);
+                pstmt.setString(2, password);
+                pstmt.executeUpdate();
+            }
+            con.commit();
+            con.close();
         }
 
     }
 
-    public Integer findByUsername(String username, Connection con) throws SQLException {
-        
-        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                "select id from users where username='" + username+ "'")) {
-            return rs.next() ? rs.getInt(1) : null;
+    public User findByUsername(String username) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                    "select * from users where username='" + username + "'")) {
+
+                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+                con.close();
+                return user;
+
+            }
+        }
+
+    }
+
+    public Boolean UsernameExists(String username) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                    "select COUNT(*) from users where username='" + username + "'")) {
+
+                //con.close();
+                return rs.getInt(1) != 0;
+
+            }
         }
     }
 
+    public void delete(String username) throws SQLException {
 
-    public String findPassword(String username, Connection con) throws SQLException {
-        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                "select password from users where username='" + username+ "'")) {
-
-             return rs.next() ? rs.getString(1) : null;
-
+        try (Connection con = Connection_Database.getConnection()) {
+            try (PreparedStatement pstmt = con.prepareStatement(
+                    "delete from users where username='" + username + "'")) {
+                pstmt.executeUpdate();
+            }
+            con.commit();
+            con.close();
         }
     }
 
-    public void delete(String username, Connection con) throws SQLException {
-        
-        try (PreparedStatement pstmt = con.prepareStatement(
-                "delete from users where username='" + username + "'")) {
-            pstmt.executeUpdate();
+    public void delete_by_ID(int id) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+            try (PreparedStatement pstmt = con.prepareStatement(
+                    "delete from users where id='" + id + "'")) {
+                pstmt.executeUpdate();
+            }
+            con.commit();
+            con.close();
         }
     }
+
 }
