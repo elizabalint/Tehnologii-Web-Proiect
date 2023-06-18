@@ -1,3 +1,14 @@
+function showErrorWithTimeout(message, timeout) {
+  const errorMessage = document.getElementById('errorMessage');
+
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(function () {
+    errorMessage.style.display = 'none';
+  }, timeout);
+}
+
 const signupForm = document.getElementById('signupForm');
 
 if(signupForm ) {
@@ -19,14 +30,15 @@ if(signupForm ) {
         
         if (data.success) {
             // If login was successful          
-            //console.log(data);
+            
             location.replace("General.html");
           
           } else {
             // If login failed
-            // data.message, data.token, etc.
+            
             console.log('Login failed');
             console.log('Error message:', data.message);
+            showErrorWithTimeout(data.message, 3000);
           }
 
       })

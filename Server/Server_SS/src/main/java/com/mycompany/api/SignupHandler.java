@@ -68,7 +68,7 @@ public class SignupHandler implements HttpHandler {
             String password = passwordBody.toString();
             String password_confirm = password_confirmBody.toString();
 
-            System.out.println(username + " " + password + " " + password_confirm);
+           // System.out.println(username + " " + password + " " + password_confirm);
 
             // Verify login credentials
             // login credentials are bad

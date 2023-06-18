@@ -34,7 +34,9 @@ body {
 
 .box_menu {
   margin: 3% auto;
-  width: 83%;
+  width:82%;
+  height: 950px;
+  max-height: 70%;
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -185,6 +187,9 @@ label input[type="checkbox"] {
 .box_menu_2 {
   margin: 6% auto;
   width: 60%;
+  height: 800px;
+  max-height: 70%;
+  max-width: 70%;
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -199,17 +204,19 @@ label input[type="checkbox"] {
 .box_menu_2 .container{
   padding: 38px;
   overflow: hidden;
+
 }
 
 .box_menu_2 .container h5 {
   font-size: 5vmax;
   line-height: 1;
   color: black;
+  margin-bottom: 20%;
 
 }
 
 .box_menu_2 .container p {
-  font-size: 17px;
+  font-size: 20px;
   color: black;
 }
 
@@ -256,4 +263,19 @@ label input[type="checkbox"] {
   margin-right: auto;
   width: 85%;
 }
+
+.box_menu .right .error {
+  color: red;
+  font-size: 24px;
+  font-weight: 600;
+
+}
+
+.box_menu_2 .container .error{
+  color: red;
+  font-size: 24px;
+  font-weight: 700;
+
+}
+
 

@@ -1,7 +1,18 @@
 
+function showErrorWithTimeout(message, timeout) {
+  const errorMessage = document.getElementById('errorMessage');
+
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(function () {
+    errorMessage.style.display = 'none';
+  }, timeout);
+}
+
 const loginForm = document.getElementById('loginForm');
 
-if(loginForm) {
+if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
 
@@ -19,16 +30,19 @@ if(loginForm) {
 
 
         if (data.success) {
-            // If login was successful          
-            //console.log(data);
-            location.replace("General.html");
+          // If login was successful          
           
-          } else {
-            // If login failed
-            // data.message, data.token, etc.
-            console.log('Login failed');
-            console.log('Error message:', data.message);
-          }
+          location.replace("General.html");
+
+        } else {
+          // If login failed
+
+          console.log('Login failed');
+          console.log('Error message:', data.message);
+          
+          showErrorWithTimeout(data.message, 3000);
+
+        }
 
       })
       .catch(error => {
