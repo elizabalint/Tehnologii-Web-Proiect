@@ -1,13 +1,13 @@
+const signupForm = document.getElementById('signupForm');
 
-const loginForm = document.getElementById('loginForm');
-
-if(loginForm) {
-  loginForm.addEventListener('submit', (event) => {
+if(signupForm ) {
+    signupForm .addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
 
-    const formData = new FormData(loginForm);
-    const url = 'http://localhost:8081/api/login'; // API URL
-
+    const formData = new FormData(signupForm);
+    const url = 'http://localhost:8081/api/signup'; // API URL
+  
+  
 
 
     fetch(url, {
@@ -16,8 +16,7 @@ if(loginForm) {
     })
       .then(response => response.json())
       .then(data => {
-
-
+        
         if (data.success) {
             // If login was successful          
             //console.log(data);
@@ -37,5 +36,3 @@ if(loginForm) {
   });
 
 }
-
-
