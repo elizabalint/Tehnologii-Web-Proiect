@@ -5,6 +5,7 @@
 package com.mycompany.api;
 
 import com.mycompany.database.Connection_Database;
+import com.mycompany.database.SessionsDAO;
 import com.mycompany.database.UsersDAO;
 import com.mycompany.objects.User;
 import com.sun.net.httpserver.HttpExchange;
@@ -15,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -89,8 +91,15 @@ public class SignupHandler implements HttpHandler {
                     else {
                         //password and password_confirm are the same
                         if (password.equals(password_confirm)) {
-                            u.create(username, password);
-                            sendResponse(exchange, "true", "Login successful", 200);
+                            
+                            u.create(username, password);                           
+                            //create Session
+                            User user=u.findByUsername(username);
+                            String sesiune=createSession(user.getId());
+                            
+                            sendResponse(exchange, "true", sesiune, 200);
+                            
+                           
                         }
                         else  sendResponse(exchange, "false", "Passwords do not match", 401);
 
@@ -114,5 +123,18 @@ public class SignupHandler implements HttpHandler {
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
         os.close();
+    }
+    
+      private String createSession(int id_user) {
+        
+       String id_session= UUID.randomUUID().toString();
+       SessionsDAO s = new SessionsDAO();
+        try {
+            s.create(id_session, id_user);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+     return id_session;
     }
 }

@@ -12,13 +12,13 @@ function showErrorWithTimeout(message, timeout) {
 
 const loginForm = document.getElementById('loginForm');
 
+
 if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(loginForm);
     const url = 'http://localhost:8081/api/login'; // API URL
-
 
 
     fetch(url, {
@@ -30,9 +30,14 @@ if (loginForm) {
 
 
         if (data.success) {
-          // If login was successful          
+          // If login was successful      
           
-          location.replace("General.html");
+        document.cookie = "session="+data.message; 
+        window.location.href = "General.html";
+          //alert(document.cookie);        
+         // location.replace("General.html");
+         //console.log(data.message);
+         
 
         } else {
           // If login failed

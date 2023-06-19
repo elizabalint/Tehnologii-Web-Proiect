@@ -164,7 +164,7 @@ li a:hover {
    background-image:linear-gradient(123deg, rgb(150, 150, 197) 15%, rgb(134, 132, 221) 100%); 
   /* background-color: purple; */
   min-width: 2em;
-  margin-top:4.8%;
+  margin-top:70px;
   padding: inherit;
   z-index: 1;
   font-size:inherit;
