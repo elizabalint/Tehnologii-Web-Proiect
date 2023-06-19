@@ -140,7 +140,7 @@ body {
 
 /* Checkbox - remember me*/
 
- label {
+  label {
   display: block;
   position: relative;
   margin-left: 30px;
@@ -154,7 +154,6 @@ label::before {
   font-family: "Serif";
   font-size: 16px;
   height: 20px;
-  /* background: transparent; */
   border: 3px solid rgb(75, 9, 228);
   border-radius: 2px;
   color: transparent;
@@ -162,15 +161,16 @@ label::before {
   transition: all 0.2s linear;
 }
 
-label:hover::before {
+ label:hover::before {
   font-family: "Serif";
   content: '\2713';
   color: white;
   cursor: pointer;
   background: rgb(75, 9, 228)
-}
+} 
 
-label input[type="checkbox"] {
+
+  label input[type="checkbox"] {
   display:none;
 } 
 
@@ -179,7 +179,9 @@ label input[type="checkbox"] {
   cursor: pointer;
   position: relative;
   display: inline-block;
-} 
+}    
+
+
 
 
 /* Sign up page */

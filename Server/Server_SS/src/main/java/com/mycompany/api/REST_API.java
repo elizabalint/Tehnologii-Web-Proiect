@@ -14,6 +14,8 @@ public class REST_API {
     public void CreateContexts(HttpServer server){
     server.createContext("/api/login", (HttpHandler) new LoginHandler());
     server.createContext("/api/signup", (HttpHandler) new SignupHandler());
+    server.createContext("/api/session", (HttpHandler) new SessionHandler());
+    server.createContext("/api/deletesession", (HttpHandler) new DeleteSessionHandler());
     }
 
     public REST_API() {

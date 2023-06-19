@@ -18,7 +18,6 @@ if(signupForm ) {
     const formData = new FormData(signupForm);
     const url = 'http://localhost:8081/api/signup'; // API URL
   
-  
 
 
     fetch(url, {
@@ -31,7 +30,11 @@ if(signupForm ) {
         if (data.success) {
             // If login was successful          
             
-            location.replace("General.html");
+            document.cookie = "session="+data.message; 
+           // alert(document.cookie);          
+            //location.replace("General.html");
+            window.location.href = "General.html";
+            //console.log(data.message);
           
           } else {
             // If login failed
