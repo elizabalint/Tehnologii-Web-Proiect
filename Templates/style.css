@@ -6,7 +6,7 @@ img {
   background-clip: padding-box;
   padding-bottom: 0px;
   padding-top: 0px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 body {
@@ -359,3 +359,13 @@ li a:hover {
 
 }
 
+
+#map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 700px;
+  
+} 
