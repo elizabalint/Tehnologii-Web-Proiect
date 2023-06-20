@@ -11,6 +11,10 @@ function showErrorWithTimeout(message, timeout) {
 
 const signupForm = document.getElementById('signupForm');
 
+//if you are in a session you can't access this
+//if (document.cookie) location.replace("General.html");
+
+//signup form
 if(signupForm ) {
     signupForm .addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
