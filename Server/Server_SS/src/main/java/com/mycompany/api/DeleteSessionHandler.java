@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -63,7 +62,9 @@ public class DeleteSessionHandler implements HttpHandler {
         } else {
             sendResponse(exchange, "false", "Invalid request method", 405);
         }
-
+    
+        CloseConnection cc= new CloseConnection();
+        cc.close();
     }
 
     private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {

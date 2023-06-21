@@ -113,6 +113,9 @@ public class SignupHandler implements HttpHandler {
         } else {
             sendResponse(exchange, "false", "Invalid request method", 405);
         }
+        
+        CloseConnection cc= new CloseConnection();
+        cc.close();
 
     }
 

@@ -43,7 +43,7 @@
 
   <!-- Number of countries selected -->
   <div class="show_countries">
-    <p>You have been to 0 out of 196 Countries</p>
+    <p>You have been to <span id="visitedCountries">0</span> out of 196 Countries</p>
   </div>
 
   <!-- Map of the world (each country same as jetpunk map), if selected a country at least once ,colour it. Can zoom in -->
@@ -60,15 +60,17 @@
 
   <div class="container_search_bar">
     <form class="search-bar">
-      <input type="text" name="search" placeholder="Search Country">
-      <button type="submit"><img src="Images/search.png" alt="search_image"></button>
+      <input type="text" name="search" id="searchInput" placeholder="Search Country">
+      <button type="submit" id="Add"><img src="Images/add.png" alt="search_image_add"></button>
+      <button type="submit" id="Remove"><img src="Images/remove.png" alt="search_image_remove"></button>
     </form>
+
   </div>
 
 
   <!-- List with all added countries and the option to delete  -->
 
-
+  <script src="API/managecountry.js"></script>
   <script src="API/session.js"></script>
 </body>
 

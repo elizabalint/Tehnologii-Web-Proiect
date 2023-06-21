@@ -61,6 +61,25 @@ body {
 .search-bar button img{
   width: 1.5em;
 }
+
+.search-bar button {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer;
+  margin-left:3px;
+}
+
+#Remove img {
+  width: 49px; 
+  
+}
+
+#Add img {
+  width: 49px;  
+}
+
+
 .search-bar button{
   border:none;
   border-radius: 10em;

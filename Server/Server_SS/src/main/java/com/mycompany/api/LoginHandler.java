@@ -103,6 +103,9 @@ public class LoginHandler implements HttpHandler {
             sendResponse(exchange, "false", "Invalid request method", 405);
         }
         
+        CloseConnection cc= new CloseConnection();
+        cc.close();
+        
     }
 
     private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {

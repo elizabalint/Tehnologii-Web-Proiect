@@ -35,34 +35,30 @@ public class SessionsDAO {
 
     public Session findByUser(int id_user) throws SQLException {
 
-        try (Connection con = Connection_Database.getConnection()) {
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select * from sessions where id_user='" + id_user + "'")) {
+        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM sessions WHERE id_user='" + id_user + "'")) {
 
+            if (rs.next()) {
                 Session session = new Session(rs.getString(1), rs.getInt(2));
-                con.close();
                 return session;
-
             }
         }
+        return null;
 
     }
 
     public Session findBySession(String id_session) throws SQLException {
 
-        try (Connection con = Connection_Database.getConnection()) {
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select * from sessions where id_session='" + id_session + "'")) {
+        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM sessions WHERE id_session='" + id_session + "'")) {
 
+            if (rs.next()) {
                 Session session = new Session(rs.getString(1), rs.getInt(2));
-                con.close();
                 return session;
-
             }
         }
+        return null;
     }
-    
-     public Boolean SessionExists(String id_session) throws SQLException {
+
+    public Boolean SessionExists(String id_session) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
 
@@ -75,7 +71,7 @@ public class SessionsDAO {
             }
         }
     }
-    
+
     public void delete(String id_session) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
@@ -87,8 +83,8 @@ public class SessionsDAO {
             con.close();
         }
     }
-    
-    public void deleteByUser(int id_user)throws SQLException {
+
+    public void deleteByUser(int id_user) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
             try (PreparedStatement pstmt = con.prepareStatement(
