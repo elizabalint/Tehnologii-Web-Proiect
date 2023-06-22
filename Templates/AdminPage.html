@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Menu -->
+
+    <ul id="mainmenu">
+        <li class="left"><a> Welcome to the Admin Page</a></li>
+        <li class="right"><a id="logoutLink" href="#">LOG OUT</a></li>
+    </ul>
+
+    <br><br>
+
+
+    <!-- Container where it will be shown -->
+    <div class="table-container">
+        <button type="submit" id="Users">Users</button>
+        <button type="submit" id="Souvenirs">Souvenirs</button>
+        <h2>Table of <span id="tabletype"></span></h2>
+
+        <table class="element-list" id="element-table"></table>
+        <thead>
+
+        </thead>
+        <tbody id="elem-list">
+            <!-- User data will be added here -->
+        </tbody>
+        </table>
+       
+        <!-- Previous and Next Buttons -->
+        <div class="pagination">
+            <button id="prev-button">Previous</button>
+            <button id="next-button">Next</button>
+          </div>
+
+
+    </div>
+
+
+    <script src="API/admin-users.js" .></script>
+    <script src="API/session.js"></script>
+</body>
+
+</html>

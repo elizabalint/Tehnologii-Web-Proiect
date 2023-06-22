@@ -59,8 +59,11 @@ if (loginForm) {
 
           //create session cookie and go to general.html page
           document.cookie = "session=" + data.message;
-          window.location.href = "General.html";
-
+       
+          if (data.admin === true)  window.location.href = "AdminPage.html";
+          else window.location.href = "General.html";
+         
+        
 
         } else {
           // If login failed

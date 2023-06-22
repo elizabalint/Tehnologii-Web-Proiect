@@ -84,7 +84,8 @@ public class LoginHandler implements HttpHandler {
                     deleteSession(user.getId());
                     String sesiune=createSession(user.getId());
                     
-                    hc.sendResponse(exchange, "true",sesiune , 200);
+                    if("true".equals(user.getAdmin())) hc.sendAdminResponse(exchange, "true",sesiune,"true" , 200);
+                    else hc.sendResponse(exchange, "true",sesiune , 200);
 
                     }
                     //incorrect password
