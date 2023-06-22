@@ -33,10 +33,9 @@ public class SignupHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
+       HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+        hc.setCORS(exchange);
 
         if ("POST".equals(exchange.getRequestMethod())) {
 
@@ -69,14 +68,14 @@ public class SignupHandler implements HttpHandler {
             String username = usernameBody.toString();
             String password = passwordBody.toString();
             String password_confirm = password_confirmBody.toString();
-
-           // System.out.println(username + " " + password + " " + password_confirm);
+         
 
             // Verify login credentials
+            
             // login credentials are bad
             if (username.length() < 6 || username.length() > 12 || password.length() < 6 || password.length() > 12) {
 
-                sendResponse(exchange, "false", "Invalid credentials", 401);
+                hc.sendResponse(exchange, "false", "Invalid credentials", 401);
 
             } else {
                 //check in database if user exists or not, if not create it
@@ -86,7 +85,7 @@ public class SignupHandler implements HttpHandler {
                 try {
                     //username already exists
                     if (u.UsernameExists(username) == true) {
-                        sendResponse(exchange, "false", "User already exists", 403);
+                        hc.sendResponse(exchange, "false", "User already exists", 403);
                     } //login credentials are good
                     else {
                         //password and password_confirm are the same
@@ -97,11 +96,11 @@ public class SignupHandler implements HttpHandler {
                             User user=u.findByUsername(username);
                             String sesiune=createSession(user.getId());
                             
-                            sendResponse(exchange, "true", sesiune, 200);
+                            hc.sendResponse(exchange, "true", sesiune, 200);
                             
                            
                         }
-                        else  sendResponse(exchange, "false", "Passwords do not match", 401);
+                        else  hc.sendResponse(exchange, "false", "Passwords do not match", 401);
 
                     }
 
@@ -111,20 +110,15 @@ public class SignupHandler implements HttpHandler {
             }
 
         } else {
-            sendResponse(exchange, "false", "Invalid request method", 405);
+            hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
+        
+       
+        hc.closeconnection();
 
     }
 
-    private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {
-
-        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\" }";
-        exchange.sendResponseHeaders(code, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
-    
+ 
       private String createSession(int id_user) {
         
        String id_session= UUID.randomUUID().toString();

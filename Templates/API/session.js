@@ -1,12 +1,11 @@
 
-console.log(document.cookie);
+// console.log(document.cookie);
 
-// API endpoint
+// API endpoints
 const url = 'http://localhost:8081/api/session';
 const url2 = 'http://localhost:8081/api/deletesession';
 
-//document.cookie = "session=1ad25a18-97b9-49db-b28a-06bf1aa49cd7;expires=Thu, 01 Jan 1970 00:00:01 GMT";
-
+// Verify the session
 if (document.cookie) {
     fetch(url, {
         method: 'POST',
@@ -28,6 +27,8 @@ if (document.cookie) {
 }
 else location.replace("Home.html");
 
+
+//LOG OUT
 var logoutLink = document.getElementById("logoutLink");
 
 // Add click event listener to the logout link

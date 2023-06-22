@@ -30,10 +30,9 @@ public class SessionHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
+        HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+        hc.setCORS(exchange);
 
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
@@ -59,10 +58,10 @@ public class SessionHandler implements HttpHandler {
             try {
                 if(s.SessionExists(id_session)==true){
                 //Session sesiune=s.findBySession(id_session);
-                sendResponse(exchange, "true","Session exists" , 200);
+                hc.sendResponse(exchange, "true","Session exists" , 200);
                 }
                 else{
-                sendResponse(exchange, "false", "Session does not exist", 404);
+                hc.sendResponse(exchange, "false", "Session does not exist", 404);
                 }
                 
                 
@@ -73,18 +72,12 @@ public class SessionHandler implements HttpHandler {
             
             
         }else {
-            sendResponse(exchange, "false", "Invalid request method", 405);
+            hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
-
+     
+        hc.closeconnection();
     }
     
-     private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {
-
-        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\" }";
-        exchange.sendResponseHeaders(code, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
+  
 
 }

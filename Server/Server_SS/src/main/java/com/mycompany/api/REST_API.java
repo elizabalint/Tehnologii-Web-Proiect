@@ -15,7 +15,11 @@ public class REST_API {
     server.createContext("/api/login", (HttpHandler) new LoginHandler());
     server.createContext("/api/signup", (HttpHandler) new SignupHandler());
     server.createContext("/api/session", (HttpHandler) new SessionHandler());
-    server.createContext("/api/deletesession", (HttpHandler) new DeleteSessionHandler());
+    server.createContext("/api/deletesession", (HttpHandler) new DeleteSessionHandler());   
+    server.createContext("/api/addcountry", (HttpHandler) new AddCountryHandler());
+    server.createContext("/api/removecountry", (HttpHandler) new RemoveCountryHandler()); 
+    server.createContext("/api/numberofcountries", (HttpHandler) new NumberOfCountriesHandler()); 
+     server.createContext("/api/mapcolors", (HttpHandler) new MapColorsHandler());  
     }
 
     public REST_API() {

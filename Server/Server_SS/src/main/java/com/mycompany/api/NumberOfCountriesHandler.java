@@ -4,8 +4,10 @@
  */
 package com.mycompany.api;
 
-import com.mycompany.database.SessionsDAO;
-import com.mycompany.objects.Session;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.database.*;
+import com.mycompany.objects.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
@@ -14,19 +16,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author ignat
  */
-public class DeleteSessionHandler implements HttpHandler {
-
-    public DeleteSessionHandler() {
-    }
+public class NumberOfCountriesHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        HandlerCommander hc= new HandlerCommander();
+        // Set CORS headers
+       HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
 
@@ -41,28 +40,37 @@ public class DeleteSessionHandler implements HttpHandler {
                 requestBody.append(line);
             }
 
-            //extract the session id
             String request = requestBody.toString();
-            int equalsIndex = request.indexOf("=");
-            String id_session = request.substring(equalsIndex + 1);
-            // System.out.println(id_session);
 
-            //Delete the sessions
+            // Retrieve the values of "country" and "session" from the JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonrequest = objectMapper.readTree(request);
+
+            String sessionx = jsonrequest.get("session").asText();
+            int equalsIndex = sessionx.indexOf("=");
+            String session = sessionx.substring(equalsIndex + 1);
+            
+          
             SessionsDAO s = new SessionsDAO();
+            VisitedCountriesDAO v = new VisitedCountriesDAO();
+            Session sesiune;
             try {
-                s.delete(id_session);
-                 hc.sendResponse(exchange, "true","Deleted succesfully" , 200);
+                sesiune = s.findBySession(session);
+                Integer nr = v.NumberOfAssociations(sesiune.getId_user());
+                String string_number=nr.toString();
+                hc.sendResponse(exchange, "true", string_number, 200);
                 
             } catch (SQLException ex) {
-               System.out.println(ex);
+                System.out.println(ex);
             }
-           
 
         } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
-    
+
         hc.closeconnection();
+
     }
+
 
 }
