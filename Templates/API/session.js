@@ -1,6 +1,4 @@
 
-// console.log(document.cookie);
-
 // API endpoints
 const url = 'http://localhost:8081/api/session';
 const url2 = 'http://localhost:8081/api/deletesession';
@@ -16,6 +14,9 @@ if (document.cookie) {
 
             if (data.success) {
                 console.log(data);
+                if (document.title === "Admin") {
+                if(data.admin !== true) location.replace("Home.html");
+                }              
             }
             else {
                 location.replace("Home.html");
@@ -66,6 +67,3 @@ logoutLink.addEventListener("click", function (event) {
 
     else {window.location.href = "Home.html";}
 });
-
-
-

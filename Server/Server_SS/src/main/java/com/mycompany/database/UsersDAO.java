@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import com.mycompany.objects.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersDAO {
 
@@ -34,7 +36,7 @@ public class UsersDAO {
             try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                     "select * from users where username='" + username + "'")) {
 
-                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 //con.close();
                 return user;
 
@@ -42,19 +44,41 @@ public class UsersDAO {
         }
 
     }
-    
-      public User findByID(int id) throws SQLException {
+
+    public User findByID(int id) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
             try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                     "select * from users where id='" + id + "'")) {
 
-                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 //con.close();
                 return user;
 
             }
         }
+
+    }
+
+    public List<User> findAllUsers() throws SQLException {
+        List<User> userList = new ArrayList<>();
+
+        try (Connection con = Connection_Database.getConnection()) {
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM users")) {
+
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("username");
+                    String password = rs.getString("password");
+                    String admin = rs.getString("admin");
+
+                    User user = new User(id, name, password, admin);
+                    userList.add(user);
+                }
+            }
+        }
+
+        return userList;
 
     }
 

@@ -19,7 +19,8 @@ public class REST_API {
     server.createContext("/api/addcountry", (HttpHandler) new AddCountryHandler());
     server.createContext("/api/removecountry", (HttpHandler) new RemoveCountryHandler()); 
     server.createContext("/api/numberofcountries", (HttpHandler) new NumberOfCountriesHandler()); 
-     server.createContext("/api/mapcolors", (HttpHandler) new MapColorsHandler());  
+    server.createContext("/api/mapcolors", (HttpHandler) new MapColorsHandler());  
+    server.createContext("/api/table_users", (HttpHandler) new Table_UsersHandler());
     }
 
     public REST_API() {

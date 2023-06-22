@@ -5,7 +5,9 @@
 package com.mycompany.api;
 
 import com.mycompany.database.SessionsDAO;
+import com.mycompany.database.UsersDAO;
 import com.mycompany.objects.Session;
+import com.mycompany.objects.User;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -57,8 +59,12 @@ public class SessionHandler implements HttpHandler {
             
             try {
                 if(s.SessionExists(id_session)==true){
-                //Session sesiune=s.findBySession(id_session);
-                hc.sendResponse(exchange, "true","Session exists" , 200);
+                Session sesiune=s.findBySession(id_session);
+                UsersDAO u=new UsersDAO();
+                User user=u.findByID(sesiune.getId_user());
+                
+                if("true".equals(user.getAdmin())) hc.sendAdminResponse(exchange, "true","Session admin","true" , 200);
+                else hc.sendAdminResponse(exchange, "true","Session exists","false" , 200);
                 }
                 else{
                 hc.sendResponse(exchange, "false", "Session does not exist", 404);
