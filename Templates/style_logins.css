@@ -34,7 +34,9 @@ body {
 
 .box_menu {
   margin: 3% auto;
-  width: 83%;
+  width:82%;
+  height: 950px;
+  max-height: 70%;
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -138,7 +140,7 @@ body {
 
 /* Checkbox - remember me*/
 
- label {
+  /* label {
   display: block;
   position: relative;
   margin-left: 30px;
@@ -152,7 +154,6 @@ label::before {
   font-family: "Serif";
   font-size: 16px;
   height: 20px;
-  /* background: transparent; */
   border: 3px solid rgb(75, 9, 228);
   border-radius: 2px;
   color: transparent;
@@ -160,15 +161,16 @@ label::before {
   transition: all 0.2s linear;
 }
 
-label:hover::before {
+ label:hover::before {
   font-family: "Serif";
   content: '\2713';
   color: white;
   cursor: pointer;
   background: rgb(75, 9, 228)
-}
+} 
 
-label input[type="checkbox"] {
+
+  label input[type="checkbox"] {
   display:none;
 } 
 
@@ -177,7 +179,68 @@ label input[type="checkbox"] {
   cursor: pointer;
   position: relative;
   display: inline-block;
-} 
+}     */
+
+label {
+  display: block;
+  position: relative;
+  margin-left: 30px;
+  width: 80%;
+  
+  
+}
+
+label::before {
+  
+  content: '\2713';
+  position: absolute;
+  font-family: "Serif";
+  font-size: 16px;
+  height: 20px;
+  border: 3px solid rgb(75, 9, 228);
+  border-radius: 2px;
+  color: transparent;
+  left: -30px;
+  transition: all 0.2s linear;
+}
+
+label:hover::before,
+label input[type="checkbox"]:checked + span.text-checkbox::before {
+  font-family: "Serif";
+  content: '\2713';
+  color: white;
+  cursor: pointer;
+  background: rgb(75, 9, 228);
+  
+}
+
+label input[type="checkbox"] {
+  display: none;
+  
+  
+}
+
+label span.text-checkbox {
+  font-size: 21px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  
+}
+
+label span.text-checkbox::before {
+  
+  position: absolute;
+  width: 15px;
+  height: 22px;
+  line-height: 20px;
+  left: -29px;
+  top:3px;
+ 
+}
+
+/* left: -24%; */
+
 
 
 /* Sign up page */
@@ -185,6 +248,9 @@ label input[type="checkbox"] {
 .box_menu_2 {
   margin: 6% auto;
   width: 60%;
+  height: 800px;
+  max-height: 70%;
+  max-width: 70%;
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -199,17 +265,19 @@ label input[type="checkbox"] {
 .box_menu_2 .container{
   padding: 38px;
   overflow: hidden;
+
 }
 
 .box_menu_2 .container h5 {
   font-size: 5vmax;
   line-height: 1;
   color: black;
+  margin-bottom: 20%;
 
 }
 
 .box_menu_2 .container p {
-  font-size: 17px;
+  font-size: 20px;
   color: black;
 }
 
@@ -256,4 +324,19 @@ label input[type="checkbox"] {
   margin-right: auto;
   width: 85%;
 }
+
+.box_menu .right .error {
+  color: red;
+  font-size: 24px;
+  font-weight: 600;
+
+}
+
+.box_menu_2 .container .error{
+  color: red;
+  font-size: 24px;
+  font-weight: 600;
+
+}
+
 

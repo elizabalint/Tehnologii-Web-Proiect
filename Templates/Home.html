@@ -38,29 +38,32 @@
 
       <!-- Inputs Menu -->
       <div class="inputs">
-        <input type="text" placeholder="Enter Username" name="username">
+        <input type="text" placeholder="Enter Username" name="username" id="username">
         <br>
-        <input type="password" placeholder="Enter Password" name="password">
+        <input type="password" placeholder="Enter Password" name="password" id="password">
       </div>
 
       <br>
 
       <!-- Remember me option-->
       <div>
-        <label>
-          <input type="checkbox"  name="remembered" >
-          <span class="text-checkbox">Remember me</span>
+        <label >
+          <input type="checkbox" id="rememberCheckbox"  name="remembered" >         
+          <span class="text-checkbox"> Remember me</span>
+    
         </label>
-
-        <!-- to be seen if this will be made -->
-        <p><i>Forgot password?</i></p>
-
+ 
+     
+       <br>
       </div>
+      
 
       <!-- Login button -->
       <!-- <form action="General.html" method="POST"> -->
-        <br> <button type="submit"> Login </button>
+      <br><button type="submit"> Login </button>
       </form>
+
+      <p id="errorMessage" class="error" ></p>
 
     </div>
 

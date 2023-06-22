@@ -35,7 +35,22 @@ public class UsersDAO {
                     "select * from users where username='" + username + "'")) {
 
                 User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
-                con.close();
+                //con.close();
+                return user;
+
+            }
+        }
+
+    }
+    
+      public User findByID(int id) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                    "select * from users where id='" + id + "'")) {
+
+                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3));
+                //con.close();
                 return user;
 
             }

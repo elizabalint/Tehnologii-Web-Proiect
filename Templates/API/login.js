@@ -1,14 +1,37 @@
 
-const loginForm = document.getElementById('loginForm');
+function showErrorWithTimeout(message, timeout) {
+  const errorMessage = document.getElementById('errorMessage');
 
-if(loginForm) {
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(function () {
+    errorMessage.style.display = 'none';
+  }, timeout);
+}
+
+const loginForm = document.getElementById('loginForm');
+const usernameInput = document.getElementById('username');
+const rememberCheckbox = document.getElementById('rememberCheckbox');
+
+//If the username was remembered
+if (localStorage.getItem('remembered') === 'true') {
+  rememberCheckbox.checked = true;
+  usernameInput.value = localStorage.getItem('rememberedUsername');
+}
+
+//if you are in a session you can't access this
+//if (document.cookie) location.replace("General.html");
+
+
+//login form 
+if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(loginForm);
     const url = 'http://localhost:8081/api/login'; // API URL
-
-
+    const username = usernameInput.value;
 
     fetch(url, {
       method: 'POST',
@@ -19,16 +42,35 @@ if(loginForm) {
 
 
         if (data.success) {
-            // If login was successful          
-            //console.log(data);
-            location.replace("General.html");
-          
+          // If login was successful  
+
+         // Check if the "Remember me" checkbox is checked
+          if (rememberCheckbox.checked) {
+            // Store the username and the "remembered" flag in localStorage
+            localStorage.setItem('rememberedUsername', username);
+            localStorage.setItem('remembered', 'true');
+
           } else {
-            // If login failed
-            // data.message, data.token, etc.
-            console.log('Login failed');
-            console.log('Error message:', data.message);
+            // Clear the stored username and the "remembered" flag from localStorage
+            localStorage.removeItem('rememberedUsername');
+            localStorage.removeItem('remembered');
+
           }
+
+          //create session cookie and go to general.html page
+          document.cookie = "session=" + data.message;
+          window.location.href = "General.html";
+
+
+        } else {
+          // If login failed
+
+          console.log('Login failed');
+          console.log('Error message:', data.message);
+
+          showErrorWithTimeout(data.message, 3000);
+
+        }
 
       })
       .catch(error => {
@@ -36,6 +78,7 @@ if(loginForm) {
       });
   });
 
+  // loginForm.reset();
 }
 
 

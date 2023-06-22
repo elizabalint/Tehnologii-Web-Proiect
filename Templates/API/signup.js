@@ -1,12 +1,26 @@
+function showErrorWithTimeout(message, timeout) {
+  const errorMessage = document.getElementById('errorMessage');
+
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+
+  setTimeout(function () {
+    errorMessage.style.display = 'none';
+  }, timeout);
+}
+
 const signupForm = document.getElementById('signupForm');
 
+//if you are in a session you can't access this
+//if (document.cookie) location.replace("General.html");
+
+//signup form
 if(signupForm ) {
     signupForm .addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(signupForm);
     const url = 'http://localhost:8081/api/signup'; // API URL
-  
   
 
 
@@ -19,14 +33,19 @@ if(signupForm ) {
         
         if (data.success) {
             // If login was successful          
-            //console.log(data);
-            location.replace("General.html");
+            
+            document.cookie = "session="+data.message; 
+           // alert(document.cookie);          
+            //location.replace("General.html");
+            window.location.href = "General.html";
+            //console.log(data.message);
           
           } else {
             // If login failed
-            // data.message, data.token, etc.
+            
             console.log('Login failed');
             console.log('Error message:', data.message);
+            showErrorWithTimeout(data.message, 3000);
           }
 
       })
