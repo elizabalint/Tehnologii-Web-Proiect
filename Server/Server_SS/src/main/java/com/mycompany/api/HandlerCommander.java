@@ -38,6 +38,15 @@ public class HandlerCommander {
         os.write(response.getBytes());
         os.close();
     }
+    
+     public void sendAdminResponse(HttpExchange exchange, String token, String message,String admin,int code) throws IOException {
+
+        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\", \"admin\": " + admin + " }";
+        exchange.sendResponseHeaders(code, response.getBytes().length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
 
     public void setCORS(HttpExchange exchange) {
         exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");

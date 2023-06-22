@@ -4,19 +4,17 @@
  */
 package com.mycompany.api;
 
-import com.mycompany.database.SessionsDAO;
-import com.mycompany.database.UsersDAO;
-import com.mycompany.objects.Session;
-import com.mycompany.objects.User;
-import com.sun.net.httpserver.Headers;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.database.*;
+import com.mycompany.objects.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,15 +22,15 @@ import java.util.logging.Logger;
  *
  * @author ignat
  */
-public class SessionHandler implements HttpHandler {
+public class Delete_UserHandler implements HttpHandler {
 
-    public SessionHandler() {
+    public Delete_UserHandler() {
     }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
-        HandlerCommander hc= new HandlerCommander();
+        HandlerCommander hc = new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
 
@@ -49,41 +47,26 @@ public class SessionHandler implements HttpHandler {
 
             //extract the session id
             String request = requestBody.toString();
-            int equalsIndex = request.indexOf("=");
-            String id_session = request.substring(equalsIndex + 1);
-            // System.out.println(id_session);
-            
-            
-            //Verify and send response if there is or not a session with that name
-            SessionsDAO s=new SessionsDAO();
-            
+
+            // Retrieve the value the id_user from the JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonrequest = objectMapper.readTree(request);
+            String id_user = jsonrequest.get("id_user").asText();
+
+            int user = Integer.parseInt(id_user);
+
             try {
-                if(s.SessionExists(id_session)==true){
-                Session sesiune=s.findBySession(id_session);
-                UsersDAO u=new UsersDAO();
-                User user=u.findByID(sesiune.getId_user());
-                
-                if("true".equals(user.getAdmin())) hc.sendAdminResponse(exchange, "true","Session admin","true" , 200);
-                else hc.sendAdminResponse(exchange, "true","Session exists","false" , 200);
-                }
-                else{
-                hc.sendResponse(exchange, "false", "Session does not exist", 404);
-                }
-                
-                
+                UsersDAO u = new UsersDAO();
+                u.delete_by_ID(user);
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
-            
-            
-            
-        }else {
+
+        } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
-     
+
         hc.closeconnection();
     }
-    
-  
 
 }

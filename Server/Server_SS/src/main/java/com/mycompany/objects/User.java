@@ -11,7 +11,7 @@ package com.mycompany.objects;
 public class User {
 
     private int id;
-    private String username, password;
+    private String username, password,admin;
 
     public User() {
     }
@@ -21,6 +21,17 @@ public class User {
         this.username = username;
         this.password = password;       
     }
+
+    public User(int id, String username, String password, String admin) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+    }
+
+    public String getAdmin() {
+        return admin;
+    } 
     
     public int getId() {
         return id;
@@ -36,7 +47,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password +  '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", admin=" + admin + '}';
     }
+
+    
 
 }
