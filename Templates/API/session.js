@@ -15,7 +15,7 @@ if (document.cookie) {
         .then(data => {
 
             if (data.success) {
-                console.log(data);;
+                console.log(data);
             }
             else {
                 location.replace("Home.html");

@@ -1,5 +1,3 @@
-// Declare the map variable globally
-var map;
 
 // Function to change the svg map colors
 function changePathColors(idsToChange, classNamesToChange, color) {
@@ -40,8 +38,50 @@ function loadAndModifyMapColors() {
 
       // Modify the SVG proportions
       var svgElement = map.querySelector("svg");
-      svgElement.style.transform = "scale(0.65)";
+
+      //svgElement.style.transform = "scale(0.65)";
+      svgElement.style.transform =  "scale(0.65)";
       svgElement.style.transformOrigin = "-15% 22%";
+
+      //Zoom listener
+      var isZoomedIn = false;
+      svgElement.addEventListener("click", function (event) {
+        var svgRect = svgElement.getBoundingClientRect();
+        var offsetX = (event.clientX - svgRect.left) / svgRect.width;
+        var offsetY = (event.clientY - svgRect.top) / svgRect.height;
+
+        if (!isZoomedIn) {
+          // Zoom in
+          var zoomFactor = 1.5;
+          var newScale = zoomFactor * parseFloat(svgElement.style.transform.replace("scale(", "").replace(")", ""));
+          var translateX = (1 - zoomFactor) * offsetX * 100;
+          var translateY = (1 - zoomFactor) * offsetY * 100;
+          svgElement.style.transform = `scale(${newScale}) translate(${translateX}%, ${translateY}%)`;
+          isZoomedIn = true;
+        } else {
+          // Zoom out
+          svgElement.style.transform = "scale(0.65)";
+          isZoomedIn = false;
+        }
+      }); 
+     
+      //Show Country name
+      var pathNameDisplay = document.getElementById('pathNameDisplay');
+      svgElement.addEventListener('mouseover', function(event) {
+        var path = event.target;
+        var className = path.getAttribute('class');
+        var name = path.getAttribute('name');
+        var final;
+        
+        if(name)  final=name;
+        else if(className) final=className;
+        else final='';
+
+        pathNameDisplay.textContent = final;
+
+      });
+      
+      
 
       // We need to use the session
       var formData = new FormData();
@@ -99,29 +139,10 @@ function watchVisitedCountries(callback) {
 // Load the svg first time
 window.addEventListener("DOMContentLoaded", function () {
   loadAndModifyMapColors();
+
+
 });
 
 //Load the svg when there is a change
 watchVisitedCountries(loadAndModifyMapColors);
-
-
-
-//
-// var map = document.getElementById("map");
-// var zoomedIn = false;
-
-// map.addEventListener("click", function() {
-//   if (zoomedIn) {
-//     map.style.transform = "scale(1)";
-//     zoomedIn = false;
-//   } else {
-//     map.style.transform = "scale(2)";
-//     zoomedIn = true;
-//   }
-// });
-
-
-
-
-
 
