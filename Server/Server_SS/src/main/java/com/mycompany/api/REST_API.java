@@ -21,6 +21,7 @@ public class REST_API {
     server.createContext("/api/numberofcountries", (HttpHandler) new NumberOfCountriesHandler()); 
     server.createContext("/api/mapcolors", (HttpHandler) new MapColorsHandler());  
     server.createContext("/api/table_users", (HttpHandler) new Table_UsersHandler());
+    server.createContext("/api/deleteuser", (HttpHandler) new Delete_UserHandler());
     }
 
     public REST_API() {
