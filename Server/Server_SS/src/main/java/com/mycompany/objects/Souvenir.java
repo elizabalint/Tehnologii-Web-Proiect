@@ -10,14 +10,15 @@ package com.mycompany.objects;
  */
 public class Souvenir {
     private int id, id_country, age, popularity;
-    private String name, period, gender,buy;
+    private String name, country, period, gender,buy;
 
     public Souvenir() {
     }
-
-    public Souvenir(int id,  String name, int id_country, String period, String gender, int age, int popularity, String buy) {
+    
+    public Souvenir(int id,  String name, int id_country, String country, String period, String gender, int age, int popularity, String buy) {
         this.id = id;
         this.id_country = id_country;
+        this.country=country;
         this.age = age;
         this.popularity = popularity;
         this.name = name;
@@ -26,6 +27,11 @@ public class Souvenir {
         this.buy = buy;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -60,7 +66,7 @@ public class Souvenir {
 
     @Override
     public String toString() {
-        return "Souvenir{" + "id=" + id + ", id_country=" + id_country + ", age=" + age + ", popularity=" + popularity + ", name=" + name + ", period=" + period + ", gender=" + gender + ", buy=" + buy + '}';
+        return "Souvenir{" + "id=" + id + ", id_country=" + id_country + ", country=" + country + ", age=" + age + ", popularity=" + popularity + ", name=" + name + ", period=" + period + ", gender=" + gender + ", buy=" + buy + '}';
     }
     
     

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>General Recommandation </title>
     <link rel="stylesheet" href="../style.css">
+    <script src="API/search.js"></script>
 </head>
 <body>
 
@@ -43,12 +44,12 @@
     
 <!-- Bar to search for country and period of time-->
 <div class="container_search_bar">
-    <form class="search-bar">
-    <input type="text" name="search" placeholder="Search.." > 
+    <form class="search-bar" >
+    <input type="text" id="searchInput" name="search" placeholder="Search.." > 
     <button type="submit"><img src="../Images/search.png" alt="search_image"></button>
 </form>
 </div>
-
+<div id="searchResultsDiv"></div>
 
 <!-- List of souvenirs depending on country/period of time ( all from data base) -->
 
@@ -282,6 +283,9 @@
     </table>
 
 </div>
+
+
+
 
 </body>
 </html>
