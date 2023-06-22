@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,22 +43,37 @@ public class VisitedCountriesDAO {
 
         return false;
     }
-    
-     public Integer NumberOfAssociations(int id_user) throws SQLException {
+
+    public Integer NumberOfAssociations(int id_user) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
 
             try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
                     "select COUNT(*) from visited_user_countries where id_user='" + id_user + "'")) {
 
-
-                return rs.getInt(1) ;
+                return rs.getInt(1);
 
             }
         }
     }
-    
-    public void deleteAssociation(int id_user, int id_country)  throws SQLException {
+
+    public List<Integer> AllVisitedCountries(int id_user) throws SQLException {
+
+        List<Integer> idCountries= new ArrayList<>();
+
+        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                "SELECT id_country FROM visited_user_countries WHERE id_user='" + id_user + "'")) {
+
+            while (rs.next()) {
+                int idCountry = rs.getInt("id_country");
+                idCountries.add(idCountry);
+            }
+        }
+
+        return idCountries;
+    }
+
+    public void deleteAssociation(int id_user, int id_country) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
             try (PreparedStatement pstmt = con.prepareStatement(

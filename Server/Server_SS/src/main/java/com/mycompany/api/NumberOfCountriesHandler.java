@@ -6,11 +6,8 @@ package com.mycompany.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.database.CountriesDAO;
-import com.mycompany.database.SessionsDAO;
-import com.mycompany.database.VisitedCountriesDAO;
-import com.mycompany.objects.Country;
-import com.mycompany.objects.Session;
+import com.mycompany.database.*;
+import com.mycompany.objects.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
@@ -18,8 +15,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,9 +25,9 @@ public class NumberOfCountriesHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         // Set CORS headers
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
+       HandlerCommander hc= new HandlerCommander();
+        // Set CORS headers
+        hc.setCORS(exchange);
 
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
@@ -63,27 +58,19 @@ public class NumberOfCountriesHandler implements HttpHandler {
                 sesiune = s.findBySession(session);
                 Integer nr = v.NumberOfAssociations(sesiune.getId_user());
                 String string_number=nr.toString();
-                sendResponse(exchange, "true", string_number, 200);
+                hc.sendResponse(exchange, "true", string_number, 200);
                 
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
 
         } else {
-            sendResponse(exchange, "false", "Invalid request method", 405);
+            hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
 
-        CloseConnection cc = new CloseConnection();
-        cc.close();
+        hc.closeconnection();
 
     }
 
-    private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {
 
-        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\" }";
-        exchange.sendResponseHeaders(code, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
 }

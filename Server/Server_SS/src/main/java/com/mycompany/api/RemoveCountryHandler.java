@@ -27,11 +27,11 @@ public class RemoveCountryHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        
+       HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
-        exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        exchange.getResponseHeaders().set("Access-Control-Allow-Headers", "Content-Type");
-
+        hc.setCORS(exchange);
+        
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
@@ -66,16 +66,16 @@ public class RemoveCountryHandler implements HttpHandler {
                     //association already in database
                     if (v.AssociationExists(sesiune.getId_user(), tara.getId()) == true) {
                         v.deleteAssociation(sesiune.getId_user(), tara.getId());
-                        sendResponse(exchange, "true", "Association deleted", 200);
+                        hc.sendResponse(exchange, "true", "Country removed", 200);
 
                     } //otherwise error
                     else {
-                    sendResponse(exchange, "false", "Country is not marked as visited", 403);
+                    hc.sendResponse(exchange, "false", "Country is not marked as visited", 200);
 
                     }
 
                 } else {
-                    sendResponse(exchange, "false", "Invalid country", 404);
+                    hc.sendResponse(exchange, "false", "Invalid country", 200);
                 }
 
             } catch (SQLException ex) {
@@ -83,20 +83,12 @@ public class RemoveCountryHandler implements HttpHandler {
             }
 
         } else {
-            sendResponse(exchange, "false", "Invalid request method", 405);
+            hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
 
-        CloseConnection cc = new CloseConnection();
-        cc.close();
+       hc.closeconnection();
 
     }
 
-    private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {
-
-        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\" }";
-        exchange.sendResponseHeaders(code, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
+   
 }

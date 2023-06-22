@@ -1,5 +1,5 @@
 
-console.log(document.cookie);
+// console.log(document.cookie);
 
 // API endpoints
 const url = 'http://localhost:8081/api/session';

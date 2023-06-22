@@ -1,3 +1,4 @@
+//update nr of visited countries
 function updateVisitedCountries() {
     const visitedCountriesElement = document.getElementById('visitedCountries');
     
@@ -28,6 +29,25 @@ function updateVisitedCountries() {
       });
   }
 
+  //errors
+  function showErrorWithTimeout(message, timeout, _colour) {
+    const errorMessage = document.getElementById('errorMessage');
+  
+    errorMessage.textContent = message;
+    errorMessage.style.display = 'block';
+    errorMessage.style.color = _colour;
+    errorMessage.style.fontSize = '24px';
+    errorMessage.style.textAlign = 'center';
+    errorMessage.style.fontWeight='600';
+
+   
+
+  
+    setTimeout(function () {
+      errorMessage.style.display = 'none';
+    }, timeout);
+  }
+  
 //First Call of the function
 updateVisitedCountries();
 
@@ -64,8 +84,9 @@ document.querySelector('.search-bar').addEventListener('submit', function (event
         .then(response => response.json())
         .then(data => {
 
-            console.log(data);
-            updateVisitedCountries();
+            // console.log(data);
+            if(data.success)  {updateVisitedCountries();  showErrorWithTimeout(data.message, 2000,'green');}
+            else showErrorWithTimeout(data.message, 2000,'red');
 
         })
         .catch(error => {
