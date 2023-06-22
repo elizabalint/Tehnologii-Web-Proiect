@@ -28,7 +28,6 @@ public class AddCountryHandler implements HttpHandler {
         HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
-
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);

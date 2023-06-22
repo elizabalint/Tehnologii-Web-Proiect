@@ -41,33 +41,21 @@ public class SouvenirDAO {
         }
       }
     
-    public static List<Souvenir> findByName(String name) throws SQLException {
+    public Souvenir findByName(String name) throws SQLException {
     List<Souvenir> results = new ArrayList<>();
-    if (name != null) {
-    try (Connection con = Connection_Database.getConnection();
-         Statement stmt = con.createStatement();
-            
-         ResultSet rs = stmt.executeQuery("SELECT souvenirs.id, souvenirs.name, souvenirs.id_country, countries.name AS country, souvenirs.period, souvenirs.gender, souvenirs.age, souvenirs.popularity, souvenirs.buy  FROM souvenirs JOIN countries ON countries.id = souvenirs.id_country  WHERE souvenirs.name = '" + name + "'")) {
-                
-          
-        while (rs.next()) {
-                int id = rs.getInt("id");
-                int idCountry = rs.getInt("id_country");
-                String country=rs.getString("country");
-                String period = rs.getString("period");
-                String gender = rs.getString("gender");
-                int age = rs.getInt("age");
-                int popularity = rs.getInt("popularity");
-                String buy = rs.getString("buy");
+    
+    try (Connection con = Connection_Database.getConnection()) {
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                    "select souvenirs.id, souvenirs.name, souvenirs.id_country, countries.name AS country, souvenirs.period, souvenirs.gender, souvenirs.age, souvenirs.popularity, souvenirs.buy  FROM souvenirs JOIN countries ON countries.id = souvenirs.id_country  WHERE souvenirs.name = '" + name + "'")) {
 
-                Souvenir souvenir = new Souvenir(id, name, idCountry, country,  period, gender, age, popularity, buy);
-                results.add(souvenir);
+                Souvenir souvenir = new Souvenir(rs.getInt(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5), rs.getString(6),rs.getInt(7), rs.getInt(8), rs.getString(9));
+               
+                return souvenir;
+
             }
-        con.close();
-    }
-    }
-    return results;
+        }
 }
+    
      public static List<Souvenir> findByCountry(String country) throws SQLException {
         List<Souvenir> results = new ArrayList<>();
         try (Connection con = Connection_Database.getConnection();
@@ -178,8 +166,8 @@ public class SouvenirDAO {
                 souvenirs.add(souvenir);
             }
         }
-    }
-
+    } System.out.println(souvenirs + "gkfjdhgfs");
     return souvenirs;
+   
 }
 }
