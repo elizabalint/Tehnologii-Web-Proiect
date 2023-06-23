@@ -15,8 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -57,7 +56,13 @@ public class Delete_UserHandler implements HttpHandler {
 
             try {
                 UsersDAO u = new UsersDAO();
+                //delete user
                 u.delete_by_ID(user);
+                
+                //delete data associated with the user
+                VisitedCountriesDAO v= new VisitedCountriesDAO();
+                v.deleteAll(user);
+                
             } catch (SQLException ex) {
                 System.out.println(ex);
             }

@@ -116,7 +116,7 @@ public class UsersDAO {
                 pstmt.executeUpdate();
             }
             con.commit();
-            con.close();
+            //con.close();
         }
     }
 
