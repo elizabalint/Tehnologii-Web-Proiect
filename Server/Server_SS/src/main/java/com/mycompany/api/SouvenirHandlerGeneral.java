@@ -31,7 +31,6 @@ public class SouvenirHandlerGeneral implements HttpHandler{
     public SouvenirHandlerGeneral() {
     }
    
-    
      @Override
     public void handle(HttpExchange exchange) throws IOException{
 
@@ -42,64 +41,19 @@ public class SouvenirHandlerGeneral implements HttpHandler{
 
         if ("GET".equals(exchange.getRequestMethod())) {
 
-            InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
-            String line;
-
-            StringBuilder requestBody = new StringBuilder();
-
-            //Extract the data
-            while ((line = br.readLine()) != null) {
-                requestBody.append(line);
-            }
-
-            String request = requestBody.toString();
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonrequest = objectMapper.readTree(request);
-
-            String sessionx = jsonrequest.get("session").asText();
-            int equalsIndex = sessionx.indexOf("=");
-            String session = sessionx.substring(equalsIndex + 1);
-
+            SouvenirDAO s = new SouvenirDAO();
             try {
-                //get session user
-                SessionsDAO s = new SessionsDAO();
-                Session sesiune = s.findBySession(session);
-                //get all souvenirs
+                List<Souvenir> allSouvenirs = s.getAllSouvenirs();
 
-                List<Souvenir> obj = SouvenirDAO.getAllSouvenirs();
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonSouvenir = objectMapper.writeValueAsString(allSouvenirs);
 
-                //create the name country, name souvenir and period
-                SouvenirDAO c = new SouvenirDAO();
-                List<String> NameSouvenirs = new ArrayList<>();
-                List<String> NameCountries = new ArrayList<>();
-                List<String> Period = new ArrayList<>();
-                for (Souvenir i : obj) {
-                    Souvenir ss = c.findByName(i.getName());
-                    NameSouvenirs.add(ss.getName());
-                    NameCountries.add(ss.getCountry());
-                    Period.add(ss.getPeriod());
-                }
-                System.out.println("szdxfg");
-                System.out.println(NameSouvenirs);
-                System.out.println(NameCountries);
-                //Send data to the js
-                // Create a JSON object to hold the variable assignments
-                ObjectNode rootNode = objectMapper.createObjectNode();
-                rootNode.put("nameS", objectMapper.writeValueAsString(NameSouvenirs));
-                rootNode.put("nameC", objectMapper.writeValueAsString(NameCountries));
-                rootNode.put("period", objectMapper.writeValueAsString(Period));
-                // Convert the JSON object to a string
-                String jsonData = objectMapper.writeValueAsString(rootNode);
+                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.sendResponseHeaders(200, jsonSouvenir.getBytes().length);
 
-                // Set the response headers
-                exchange.getResponseHeaders().set("Content-Type", "application/javascript");
-                exchange.sendResponseHeaders(200, jsonData.getBytes().length);
-
-                // Write the JSON data to the response
+                // Write the JSON response
                 OutputStream outputStream = exchange.getResponseBody();
-                outputStream.write(jsonData.getBytes());
+                outputStream.write(jsonSouvenir.getBytes());
                 outputStream.close();
 
             } catch (SQLException ex) {
@@ -109,7 +63,8 @@ public class SouvenirHandlerGeneral implements HttpHandler{
         } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
-         hc.closeconnection();
+
+        hc.closeconnection();
     }
 }
 /*

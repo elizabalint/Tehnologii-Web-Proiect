@@ -21,6 +21,10 @@ public class REST_API {
     server.createContext("/api/numberofcountries", (HttpHandler) new NumberOfCountriesHandler()); 
     server.createContext("/api/mapcolors", (HttpHandler) new MapColorsHandler());  
     server.createContext("/api/table_users", (HttpHandler) new Table_UsersHandler());
+    server.createContext("/api/souvenirg", (HttpHandler) new SouvenirHandlerGeneral());
+    server.createContext("/api/souvenir", (HttpHandler) new SouvenirHandler());
+    server.createContext("/api/table_souvenirs", (HttpHandler) new Table_SouvenirsHandler());
+
     }
 
     public REST_API() {

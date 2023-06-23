@@ -29,78 +29,46 @@ import java.net.http.HttpResponse;
  */
 
 public class SouvenirHandler implements HttpHandler {
+
+    public SouvenirHandler() {
+    }
     
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
-        HandlerCommander hc= new HandlerCommander();
+         HandlerCommander hc= new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
-        System.out.println("aici");
-        
+
         if ("GET".equals(exchange.getRequestMethod())) {
-             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
-             BufferedReader br = new BufferedReader(isr);
-             StringBuilder content = new StringBuilder();
-             String line;
-             while ((line = br.readLine()) != null) {
-                  content.append(line);
-                }
-             System.out.println(content);
-             br.close();
-            String requestBody = content.toString();  
-            System.out.println(requestBody + "gf");
-            sendResponse(exchange, "true", "succes" ,200);
 
+            SouvenirDAO s = new SouvenirDAO();
+            try {
+                List<Souvenir> allSouvenirs = s.getAllSouvenirs();
 
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonSouvenir = objectMapper.writeValueAsString(allSouvenirs);
 
-            // Obțineți datele din baza de date sub forma de obiecte
-        SouvenirDAO souvenirDAO = new SouvenirDAO();
-        try{
-        List<Souvenir> souvenirs = souvenirDAO.getAllSouvenirs();
+                exchange.getResponseHeaders().set("Content-Type", "application/json");
+                exchange.sendResponseHeaders(200, jsonSouvenir.getBytes().length);
 
-        // Convertiți obiectele într-un șir de caractere JSON
-        String response = ("nbgfdfcs");
+                // Write the JSON response
+                OutputStream outputStream = exchange.getResponseBody();
+                outputStream.write(jsonSouvenir.getBytes());
+                outputStream.close();
 
-        // Setați răspunsul HTTP cu codul 200 și conținutul JSON
-        exchange.getResponseHeaders().set("Content-Type", "application/json");
-        exchange.sendResponseHeaders(200, response.length());
-
-        // Trimiteți datele JSON către client
-        OutputStream outputStream = exchange.getResponseBody();
-        outputStream.write(response.getBytes());
-        outputStream.close();
-            if (requestBody != null ) {
-                List<Souvenir> searchResults = performSearch(requestBody); 
-                if (!searchResults.isEmpty()) {
-                    sendResponse(exchange, "true", "succes" ,200);
-                } else {
-                    // No search result found
-                    sendResponse(exchange, "false", "No result found", 404);                    
-                }
-                
-            } else {
-                // Query parameters are missing
-                sendResponse(exchange, "false", "Missing query ", 400); 
-            
-        }} catch (SQLException ex) {
+            } catch (SQLException ex) {
                 System.out.println(ex);
             }
-            
+
+        } else {
+            hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
-        else  {
-                    System.out.println("Eroare la cererea HTTP: " );
-            sendResponse(exchange, "false", "Invalid request method", 405);
-        }
-    }
-    private void sendResponse(HttpExchange exchange, String token, String message, int code) throws IOException {
-        String response = "{ \"success\": " + token + ", \"message\": \"" + message + "\" }";
-        exchange.sendResponseHeaders(code, response.getBytes().length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-    }
+
+        hc.closeconnection();
     
+    }}
+    /*
     private List<Souvenir> performSearch(String query) throws IOException {
         List<Souvenir> searchResults = new ArrayList<>();
      try {
@@ -138,3 +106,4 @@ public class SouvenirHandler implements HttpHandler {
     }
 
 }
+*/

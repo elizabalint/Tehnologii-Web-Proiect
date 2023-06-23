@@ -144,7 +144,7 @@ public class SouvenirDAO {
     }
         return results;
     }
-    public static List<Souvenir> getAllSouvenirs() throws SQLException {
+    public List<Souvenir> getAllSouvenirs() throws SQLException {
     List<Souvenir> souvenirs = new ArrayList<>();
 
     try (Connection con = Connection_Database.getConnection()) {
@@ -170,4 +170,17 @@ public class SouvenirDAO {
     return souvenirs;
    
 }
+     public Boolean SouvenirExists(String name) throws SQLException {
+
+        try (Connection con = Connection_Database.getConnection()) {
+
+            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
+                    "select COUNT(*) from souvenirs where name='" + name + "'")) {
+
+                
+                return rs.getInt(1) != 0;
+
+            }
+        }
+    }
 }
