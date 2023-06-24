@@ -67,11 +67,14 @@
         <ol role="directory">
           <li><a href="#sign_in"><span>4.1 </span>Sign in page</a></li>
           <li><a href="#sign_up"><span>4.2 </span>Sign up page</a></li>
-          <li><a href="#info"><span>4.3 </span>Info page</a></li>
-          <li><a href="#map"><span>4.4 </span>Map page</a></li>
-          <li><a href="#souvenirs_info"><span>4.5 </span>Souvenirs general info</a>
-          <li><a href="#souvenirs_personal"><span>4.6 </span>Souvenirs personal recommandation</a></li>
-          <li><a href="#souvenirs_general"><span>4.7 </span>Souvenirs general recommandation</a>
+          <li><a href="#reset_password"><span>4.3 </span>Reset password page</a>
+          <li><a href="#admin_page"><span>4.4 </span>Admin page</a>
+          <li><a href="#info"><span>4.5 </span>Info page</a></li>
+          <li><a href="#map"><span>4.6 </span>Map page</a></li>
+          <li><a href="#souvenirs_info"><span>4.7 </span>Souvenirs general info</a>
+          <li><a href="#souvenirs_personal"><span>4.8 </span>Souvenirs personal recommandation</a></li>
+          <li><a href="#souvenirs_general"><span>4.9 </span>Souvenirs general recommandation</a>
+          <li><a href="#map_cartographic"><span>4.10 </span>Souvenir Shops Map</a>
           </li>
         </ol>
       </li>
@@ -79,9 +82,10 @@
       <!-- Content 5 -->
       <li><a href="#nonfunctional_requirements"><span>5. </span>Other Nonfunctional Requirements</a>
         <ol role="directory">
-          <li><a href="#safety_requirements"><span>5.1 </span>Safety Requirements</a></li>
-          <li><a href="#security_requirements"><span>5.2 </span>Security Requirements</a></li>
-          <li><a href="#software_quality"><span>5.3 </span>Software Quality Attributes</a></li>
+          <li><a href="#performance_requirements"><span>5.1 </span>Performance Requirements</a></li>
+          <li><a href="#safety_requirements"><span>5.2 </span>Safety Requirements</a></li>
+          <li><a href="#security_requirements"><span>5.3 </span>Security Requirements</a></li>
+          <li><a href="#software_quality"><span>5.4 </span>Software Quality Attributes</a></li>         
         </ol>
       </li>
 
@@ -150,15 +154,14 @@
 
     <h3 id="references"><span>1.5 </span>References </h3>
     <p>
-      In order to create the web application and this document we did a research on CSS and HTML related sites which are
+      In order to create the web application and this document we did a research on CSS and HTML and also on security related sites which are
       shown below:
     </p>
 
     <ul role="list">
-      <li><a href="https://www.w3schools.com/">W3schools</a></li>
-      <li><a href="https://jigsaw.w3.org/">JIGSAW</a></li>
-      <li><a href="https://github.com/rick4470/IEEE-SRS-Tempate#other-requirements">IEEE-Tempate</a></li>
-      <li><a href="https://w3c.github.io/scholarly-html/#references">Scholarly HTML</a></li>
+      <li><a href="https://www.w3schools.com/">W3schools</a> - used for designing some CSS and HTML divs </li>
+      <li><a href="https://jigsaw.w3.org/">JIGSAW</a> - used for validating CSS and HTML inputs</li>
+      <li><a href="https://cheatsheetseries.owasp.org">OWASP</a> - used for obtaing better SQL injection proof and XSS proof</li>
 
     </ul>
 
@@ -182,8 +185,11 @@
 
     <ul role="list">
       <li>a sign in/sign up system in order to save each user's preferences</li>
+      <li>the possibility to reset your password if an admin permits it</li>
+      <li>an admin page ment for giving privileged users the ability to modify the database</li>
       <li>a navbar that permits the users to easily access the pages of the site</li>
       <li>a method to add where the user has traveled which will be shown on an interactive map</li>
+      <li>a cartographic map that contains the location of souvenir shops all over the world</li>
       <li>the possibility to search for souvenirs depending on categories like recommended age, popularity or where you
         traveled </li>
       <li>the possibility to access all the souvenirs and their information stocked in the database</li>
@@ -206,7 +212,8 @@
 
     <h3 id="design_implementation_constraints"><span>2.5 </span>Design and Implementation Constraints </h3>
     <p>
-      Souvenir Shack will be designed using HTML, CSS, JavaScript and SVG and will have a server made in Java and also a
+      Souvenir Shack is designed using HTML, CSS, JavaScript and and will has a server made in Java that uses 
+      a REST API to communicate with the front and also a
       database created in SQLite.
     </p>
 
@@ -230,13 +237,24 @@
       <figcaption>Souvenir Shack's Sign up page</figcaption>
       <img src="Screenshots/sign_up.png " alt="sign_up_screenshot" width="120%">
     </figure>
+
+    <figure>
+      <figcaption>Souvenir Shack's Reset password page</figcaption>
+      <img src="" alt="reset_pass_screenshot" width="120%">
+    </figure>
+
+    <figure>
+      <figcaption>Souvenir Shack's Admin page</figcaption>
+      <img src="" alt="adminpage_screenshot" width="120%">
+    </figure>
+
     <figure>
       <figcaption>Souvenir Shack's Info page</figcaption>
       <img src="Screenshots/info.png" alt="info_screenshot" width="120%">
     </figure>
 
     <figure>
-      <figcaption>Souvenir Shack's Map page</figcaption>
+      <figcaption>Souvenir Shack's Map of the world page</figcaption>
       <img src="Screenshots/map.png" alt="map_screenshot" width="120%">
     </figure>
     <figure>
@@ -248,9 +266,15 @@
       <figcaption>Souvenir Shack's Souvenirs personal recommandation page</figcaption>
       <img src="Screenshots/personalized_recomm.png" alt="souvenirs_personal_screenshot" width="120%">
     </figure>
+
     <figure>
       <figcaption>Souvenir Shack's Souvenirs general recommandation page</figcaption>
       <img src="Screenshots/general_recomm.png" alt="souvenirs_general_screenshot" width="120%">
+    </figure>
+
+    <figure>
+      <figcaption>Souvenir Shack's Map of souvenir shops page</figcaption>
+      <img src="" alt="reset_pass_screenshot" width="120%">
     </figure>
 
 
@@ -262,15 +286,15 @@
 
     <h3 id="software_interfaces"><span>3.3 </span>Software Interfaces</h3>
     <p>
-      The application will have a SQLite database and a Java server which will communicate with the interfaces using
-      APIs.
+      The application has a SQLite database and a Java server which communicate with the interfaces using
+      a REST API. Also a public cartographic service is used for the souvenir shops map, using Leaflet and OpenStreetMap.
     </p>
 
     <h3 id="communications_interfaces"><span>3.4 </span>Communications Interfaces </h3>
     <p>
-      The communication standard that Souvenir Shack uses is HTTP.
-      The souvenir list will be saved in documents formatted CSV and JSON and these will be send through APIs to the
-      server or the database and vice versa.
+      The communication standard that Souvenir Shack uses is HTTP and establishes a unique session based connection.
+      The souvenir list is saved in documents formatted CSV, XML, JSON and also in the database, along with
+      the countries and other relevant data.
     </p>
 
   </section>
@@ -294,12 +318,23 @@
       if they are not taken, a new account will be created for the user's use.
     </p>
 
-    <h3 id="info"><span>4.3 </span>Info page</h3>
+    <h3 id="reset_password"><span>4.3 </span>Reset password page</h3>
+    <p>
+      This page will facilitate the users with the option to request for their password to be reset.
+    </p>
+
+    <h3 id="admin_page"><span>4.4 </span>Admin page</h3>
+    <p>
+      Only admin delegated users can access this page and they will have access to the whole users and souvenirs tables in the database,
+      also having the option to delete some records or permit user password resets.
+    </p>
+
+    <h3 id="info"><span>4.5 </span>Info page</h3>
     <p>
       This page will present general information about the website and what the users can expect to do using it.
     </p>
 
-    <h3 id="map"><span>4.4 </span>Map page</h3>
+    <h3 id="map"><span>4.6 </span>Map of the world page</h3>
     <p>
       Users accessing this page can set the countries where they have traveled so 
       that not only they will have a representation of the places they have been, 
@@ -307,14 +342,14 @@
       is selected.
     </p>
 
-    <h3 id="souvenirs_info"><span>4.5 </span>Souvenirs general info page</h3>
+    <h3 id="souvenirs_info"><span>4.7 </span>Souvenirs general info page</h3>
     <p>
       This web page has a description about the personalized recommendation and general recommendation pages. This will
       help the users
       to easily accommodate with the interfaces and their functionalities.
     </p>
 
-    <h3 id="souvenirs_personal"><span>4.6 </span>Souvenirs personal recommendation</h3>
+    <h3 id="souvenirs_personal"><span>4.8 </span>Souvenirs personal recommendation</h3>
     <p>
       Users using this feature will have a list of souvenirs displayed depending on factors like:
     <ul role="list">
@@ -324,11 +359,16 @@
     </ul>
     </p>
 
-    <h3 id="souvenirs_general"><span>4.7 </span>Souvenirs general recommandation</h3>
+    <h3 id="souvenirs_general"><span>4.9 </span>Souvenirs general recommandation</h3>
     <p>
       Users using this feature will see the whole list of souvenirs saved in the database and can sort and view where
       and in what period of time
-      are the souvenirs usually found, also being sorted by the popularity among the other users.
+      are the souvenirs usually found, which categories of people usually like them and many other categories.
+    </p>
+
+    <h3 id="map_cartographic"><span>4.10 </span>Souvenir Shops Map</h3>
+    <p>
+      This page will show an interactive map which will point out many souvenir shops across the globe.
     </p>
 
   </section>
@@ -339,17 +379,26 @@
 
     <h2><span>5. </span>Other Nonfunctional Requirements</h2>
 
-    <h3 id="safety_requirements"><span>5.1 </span>Safety Requirements</h3>
+    <h3 id="performance_requirements"><span>5.1 </span>Performance Requirements</h3>
     <p>
-      The web application may only suffer from a database loose of information, which is highly unlikely.
+      The web application uses a thread connection pool and also a database connection pool in order to
+      speed up the interactions for the users and also can support multiple events from different users at once.
     </p>
 
-    <h3 id="security_requirements"><span>5.2 </span>Security Requirements </h3>
+    <h3 id="safety_requirements"><span>5.2 </span>Safety Requirements</h3>
     <p>
-      The application will cotain sql injection protection so that the informations can't be stolen.
+      The website is constraining and validating the inputs of the logins and also 
+      warns the users when their chosen inputs cause a problem, don't respect the needed formats
+      or notifies them when the action has succeeded.
     </p>
 
-    <h3 id="software_quality"><span>5.3 </span>Software Quality Attributes</h3>
+    <h3 id="security_requirements"><span>5.3 </span>Security Requirements </h3>
+    <p>
+      The web application has SQL injection and XSS proof methods implemented, like
+      opting for PreparedStatements and having a session based login.
+    </p>
+
+    <h3 id="software_quality"><span>5.4 </span>Software Quality Attributes</h3>
     <p>
     <ul role="list">
       <li>Adaptability</li>
