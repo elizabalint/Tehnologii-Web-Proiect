@@ -7,8 +7,11 @@ package com.mycompany.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mycompany.database.CountriesDAO;
 import com.mycompany.database.SessionsDAO;
 import com.mycompany.database.SouvenirDAO;
+import com.mycompany.database.VisitedCountriesDAO;
+import com.mycompany.objects.Country;
 import com.mycompany.objects.Session;
 import com.mycompany.objects.Souvenir;
 import com.sun.net.httpserver.HttpExchange;
@@ -17,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.http.HttpRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +28,13 @@ import java.util.List;
  *
  * @author eliza
  */
-public class SouvenirHandlerGeneral implements HttpHandler{
+public class SouvenirHandlerPersonalised implements HttpHandler{
 
-    public SouvenirHandlerGeneral() {
+    public SouvenirHandlerPersonalised() {
     }
-   
-     @Override
-    public void handle(HttpExchange exchange) throws IOException{
 
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
         HandlerCommander hc = new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
@@ -51,20 +52,44 @@ public class SouvenirHandlerGeneral implements HttpHandler{
             
             String request = requestBody.toString();
 
-    
-            System.out.println("brvecd");
+            //ia sesiunea userului conectat
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonrequest = objectMapper.readTree(request);
+            System.out.println("sdfgh");
             
-            if(request.isEmpty())
-            {
-            try {
+
+            String sessionx = jsonrequest.get("session").asText();
+            int equalsIndex = sessionx.indexOf("=");
+            String session = sessionx.substring(equalsIndex + 1);
+            System.out.println(session);
+            System.out.println("brvecd");
+            try{
                 //get session user
+                SessionsDAO s = new SessionsDAO();
+                Session sesiune = s.findBySession(session);
                 System.out.println("bgvfdc");
-                List<Souvenir> all= new ArrayList<>();
-                SouvenirDAO s = new SouvenirDAO();
-                all=s.getAllSouvenirs();
+                
+                List<Souvenir> souvenirs = new ArrayList<>();
+                VisitedCountriesDAO visited = new VisitedCountriesDAO();
+                List<Integer> vis = new ArrayList<>();
+                //countries user visited
+                vis = visited.AllVisitedCountries(sesiune.getId_user());
+                SouvenirDAO so = new SouvenirDAO();
+                List<Souvenir> allSouvenirs = new ArrayList<>();
+                for(Integer i : vis)
+                {
+                    List<Souvenir> countrySouvenir = new ArrayList<>();
+                    countrySouvenir = so.findByIdCountry(i);
+                    allSouvenirs.addAll(countrySouvenir);
+                }
+                
+                //Send data to the js
+                // Create a JSON object to hold the variable assignments
+                ObjectNode rootNode = objectMapper.createObjectNode();
+                rootNode.put("allSouvenirsUser", objectMapper.writeValueAsString(allSouvenirs));
+
                 // Convert the JSON object to a string
-                ObjectMapper objectMapper = new ObjectMapper();
-                String jsonData = objectMapper.writeValueAsString(all);
+                String jsonData = objectMapper.writeValueAsString(allSouvenirs);
 
                 // Set the response headers
                 exchange.getResponseHeaders().set("Content-Type", "application/javascript");
@@ -75,44 +100,18 @@ public class SouvenirHandlerGeneral implements HttpHandler{
                 outputStream.write(jsonData.getBytes());
                 outputStream.close();
         
-            } catch (SQLException ex) {
+            }catch (SQLException ex) {
                 System.out.println(ex);
             }
-}       else{
             
-                //get session user
-                System.out.println("bgvfdc");
-                List<Souvenir> all= new ArrayList<>();
-                SouvenirDAO s = new SouvenirDAO();
-                 ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonrequest = objectMapper.readTree(request);
-                String search = jsonrequest.get("search").asText();
-                int equalsIndex = search.indexOf(":");
-                String se = search.substring(equalsIndex + 1);
-                all = s.performSearch(se);
-                //if(all.isEmpty())
-                   // hc.sendResponse(exchange, "false", "Doesn't exist", 200);
-                // Convert the JSON object to a string
-                ObjectMapper objectMappers = new ObjectMapper();
-                String jsonData = objectMappers.writeValueAsString(all);
-
-                // Set the response headers
-                exchange.getResponseHeaders().set("Content-Type", "application/javascript");
-                exchange.sendResponseHeaders(200, jsonData.getBytes().length);
-
-                // Write the JSON data to the response
-                OutputStream outputStream = exchange.getResponseBody();
-                outputStream.write(jsonData.getBytes());
-                outputStream.close();
-        
-            }
-             
         } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
+        System.out.println("erca");
         hc.closeconnection();
 
     }
 
-}
+    }
+    
 

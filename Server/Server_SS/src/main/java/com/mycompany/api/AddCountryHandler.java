@@ -44,7 +44,7 @@ public class AddCountryHandler implements HttpHandler {
             // Retrieve the values of "country" and "session" from the JSON
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonrequest = objectMapper.readTree(request);
-
+            System.out.println(jsonrequest);
             String country = jsonrequest.get("country").asText();
             String sessionx = jsonrequest.get("session").asText();
             int equalsIndex = sessionx.indexOf("=");

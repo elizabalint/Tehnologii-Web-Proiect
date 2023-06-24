@@ -44,7 +44,7 @@ public class MapColorsHandler implements HttpHandler {
             }
 
             String request = requestBody.toString();
-
+            System.out.println(request);
             // Retrieve the values of "country" and "session" from the JSON
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonrequest = objectMapper.readTree(request);

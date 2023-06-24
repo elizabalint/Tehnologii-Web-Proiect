@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "name": "Cifteli",
+    "id_country": 2,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 15,
+    "popularity": 0,
+    "buy": "https://www.amazon.com/%C3%87ifteli-Cifteli-Qifteli-Shqiptare-Instrument/dp/B079P83TRZ"
+  },
+  {
+    "id": 2,
+    "name": "Eiffel Tour miniature",
+    "id_country": 60,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 15,
+    "popularity": 0,
+    "buy": "https://www.amazon.com/miniature-eiffel-tower/s?k=miniature+eiffel+tower"
+  },
+  {
+    "id": 3,
+    "name": "Perfume from grass",
+    "id_country": 60,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 15,
+    "popularity": 0,
+    "buy": "https://www.parfumdegrasse.com/?gad=1&gclid=Cj0KCQjw1rqkBhCTARIsAAHz7K16FQu1hqCSCcwNp_8MtZVFxUAlGwp1pA7y9i96eUw68Y6-k0DJrn8aAqc6EALw_wcB"
+  },
+  {
+    "id": 4,
+    "name": "Beer Steins",
+    "id_country": 64,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 18,
+    "popularity": 0,
+    "buy": "https://www.germansteins.com/categories/German-Beer-Steins/Personalized/"
+  },
+  {
+    "id": 5,
+    "name": "Cuckoo Clock\tCuckoo Clock",
+    "id_country": 64,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 15,
+    "popularity": 0,
+    "buy": "https://www.cuckoopalace.com/"
+  },
+  {
+    "id": 6,
+    "name": "Räucherfrauen",
+    "id_country": 64,
+    "period": "December",
+    "gender": "Male/Female",
+    "age": 14,
+    "popularity": 0,
+    "buy": "https://www.erzgebirgskunst-shop.de/product/raeuchermann-huettenarbeiter/"
+  },
+  {
+    "id": 7,
+    "name": "Gluhwein Mugs",
+    "id_country": 64,
+    "period": "December",
+    "gender": "Male/Female",
+    "age": 0,
+    "popularity": 0,
+    "buy": "https://christmasfromgermany.com/market-gluhwein-mug/"
+  },
+  {
+    "id": 8,
+    "name": "Confetti murano",
+    "id_country": 82,
+    "period": "All the time",
+    "gender": "Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.amazon.com/Gage-Murano-Glass-Confetti-Tumblers/dp/B096YPFD2S"
+  },
+  {
+    "id": 9,
+    "name": "Venetian mask",
+    "id_country": 82,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 15,
+    "popularity": 0,
+    "buy": "https://www.veneziamaschere.com/the-history-behind-venetian-masks/#:~:text=The%20origin%20of%20Venetian%20masks%20dates%20back%20to%20the%20Middle,during%20the%20Carnival%20of%20Venice."
+  },
+  {
+    "id": 10,
+    "name": "Ceramics",
+    "id_country": 124,
+    "period": "All the time",
+    "gender": "Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://dutchceramics.com/"
+  },
+  {
+    "id": 11,
+    "name": "Nautical Decorative Oil Lamps",
+    "id_country": 124,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.dhr.nl/dhr-decorative/products/nautical-lamps"
+  },
+  {
+    "id": 12,
+    "name": "Ptasie Mleczko",
+    "id_country": 138,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 14,
+    "popularity": 0,
+    "buy": "https://www.desertcart.ro/products/7776196-ptasie-mleczko-chocolate-covered-vanilla-marshmallow-birds-milk-chocolate-13-4-oz"
+  },
+  {
+    "id": 13,
+    "name": "Wiśniówka",
+    "id_country": 138,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://wodkacompany.com/products/lubelska-cherry-vodka-liqueur-50cl-30"
+  },
+  {
+    "id": 14,
+    "name": "Handmade table cloth",
+    "id_country": 141,
+    "period": "All the time",
+    "gender": "Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/romanian_tablecloth"
+  },
+  {
+    "id": 15,
+    "name": "Ie",
+    "id_country": 141,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 0,
+    "popularity": 0,
+    "buy": "https://anilu.ro/ro/ie-traditionala-romaneasca"
+  },
+  {
+    "id": 16,
+    "name": "Trinket",
+    "id_country": 141,
+    "period": "February",
+    "gender": "Male/Female",
+    "age": 0,
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/romania_trinket_box"
+  },
+  {
+    "id": 17,
+    "name": "Poached egg",
+    "id_country": 141,
+    "period": "April",
+    "gender": "Male/Female",
+    "age": 0,
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/romanian_easter_eggs"
+  },
+  {
+    "id": 18,
+    "name": "Dymkovo Toys",
+    "id_country": 142,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 14,
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/dymkovo_toys"
+  },
+  {
+    "id": 19,
+    "name": "Matryoshka",
+    "id_country": 142,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://nestingdolls.co/collections/matryoshka"
+  },
+  {
+    "id": 20,
+    "name": "Orenburg Shawls",
+    "id_country": 142,
+    "period": "All the time",
+    "gender": "Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.rusclothing.com/russian-shawls/down-pashminas/"
+  },
+  {
+    "id": 21,
+    "name": "Samovar",
+    "id_country": 142,
+    "period": "All the time",
+    "gender": "Female",
+    "age": "60+",
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/russian_samovar"
+  },
+  {
+    "id": 22,
+    "name": "Artwork",
+    "id_country": 163,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.etsy.com/market/spanish_artwork"
+  },
+  {
+    "id": 23,
+    "name": "Flamenco Dress",
+    "id_country": 163,
+    "period": "All the time",
+    "gender": "Female",
+    "age": "26+",
+    "popularity": 0,
+    "buy": "https://www.amazon.com/Flamenco-Dresses/s?k=Flamenco+Dresses"
+  },
+  {
+    "id": 24,
+    "name": "Sherry",
+    "id_country": 163,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": "26+",
+    "popularity": 0,
+    "buy": "https://www.decantalo.com/es/en/wine/fortified/"
+  },
+  {
+    "id": 25,
+    "name": "Motanky (Rag Dolls)",
+    "id_country": 184,
+    "period": "All the time",
+    "gender": "Male/Female",
+    "age": "1-14",
+    "popularity": 0,
+    "buy": "https://www.etsy.com/listing/469207658/ukrainian-doll-motanka-handmade"
+  },
+  {
+    "id": 26,
+    "name": "English tea",
+    "id_country": 186,
+    "period": "All the time",
+    "gender": "Female",
+    "age": "26+",
+    "popularity": 0,
+    "buy": "https://belfoods.ro/English-Tea-Shop"
+  },
+  {
+    "id": 27,
+    "name": "Tower Bridge Cufflinks",
+    "id_country": 186,
+    "period": "All the time",
+    "gender": "Male",
+    "age": 26,
+    "popularity": 0,
+    "buy": "https://www.amazon.com/Cufflinks-X2BOC148-London-Bridge-Silhoutte/dp/B01828QSL6"
+  }
+]
