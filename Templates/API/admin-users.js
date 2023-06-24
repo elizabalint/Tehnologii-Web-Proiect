@@ -1,6 +1,6 @@
 // Get the elements
 const usersButton = document.getElementById('Users');
-// const souvenirsButton = document.getElementById('Souvenirs');
+const souvenirsButton = document.getElementById('Souvenirs');
 const tableTypeSpan = document.getElementById('tabletype');
 const elementList = document.getElementById('elem-list');
 const elementTable = document.getElementById('element-table');
@@ -11,6 +11,7 @@ const nextButton = document.getElementById('next-button');
 let currentPage = 1;
 const rowsPerPage = 10;
 let userData = [];
+let souvenirData = [];
 
 // User Table
 usersButton.addEventListener('click', function () {
@@ -30,6 +31,27 @@ usersButton.addEventListener('click', function () {
         .catch(error => {
             console.log('Error:', error);
         });
+});
+
+//Souvenir table
+souvenirsButton.addEventListener('click', function() {
+  tableTypeSpan.textContent = 'Souvenirs';
+  const url = 'http://localhost:8081/api/table_souvenirs';
+
+  fetch(url, {
+    method: 'GET'
+  })
+  .then(response => response.json())
+  .then(data => {
+    souvenirData = data;
+    console.log(data);
+    currentPage = 1;
+    displayTableDataS();
+    updatePaginationButtons();
+  })
+  .catch(error => {
+    console.log('Error:', error);
+  });
 });
 
 // Display table data based on current page and the limit of rows per page
@@ -122,8 +144,17 @@ function displayTableData() {
 
 // When to stop the pagination of the buttons
 function updatePaginationButtons() {
-    prevButton.disabled = currentPage === 1;
-    nextButton.disabled = currentPage === Math.ceil(userData.length / rowsPerPage);
+  if(tableTypeSpan.textContent = 'Users')
+  {
+  prevButton.disabled = currentPage === 1;
+  nextButton.disabled = currentPage === Math.ceil(userData.length / rowsPerPage);
+  }
+  else{
+   prevButton.disabled = currentPage === 1;
+   nextButton.disabled = currentPage === Math.ceil(souvenirData.length / rowsPerPage);
+
+  }
+
 }
 
 // Event listener for previous button
