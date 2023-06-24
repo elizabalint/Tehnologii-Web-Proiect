@@ -1,4 +1,4 @@
-const url1 = 'http://localhost:8081/api/souvenirp'; // API URL
+const url1 = 'https://elizabalint.github.io:8081/api/souvenirp'; // API URL
 var formData = new FormData();
 formData.append('session', document.cookie);
 

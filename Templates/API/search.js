@@ -1,4 +1,4 @@
-const url1 = 'http://localhost:8081/api/souvenirg'; // API URL
+const url1 = 'https://elizabalint.github.io:8081/api/souvenirg'; // API URL
 
 function loadSouvenirs() {
   fetch(url1, {

@@ -16,7 +16,7 @@ let souvenirData = [];
 // User Table
 usersButton.addEventListener('click', function () {
     tableTypeSpan.textContent = 'Users';
-    const url = 'http://localhost:8081/api/table_users';
+    const url = 'https://elizabalint.github.io:8081/api/table_users';
 
     fetch(url, {
         method: 'GET'
@@ -36,7 +36,7 @@ usersButton.addEventListener('click', function () {
 //Souvenir table
 souvenirsButton.addEventListener('click', function() {
   tableTypeSpan.textContent = 'Souvenirs';
-  const url = 'http://localhost:8081/api/table_souvenirs';
+  const url = 'https://elizabalint.github.io:8081/api/table_souvenirs';
 
   fetch(url, {
     method: 'GET'
@@ -191,7 +191,7 @@ function deleteTableRow(rowId) {
     //Delete form the DB
 
     var formData = new FormData();
-    const url = 'http://localhost:8081/api/deleteuser';
+    const url = 'https://elizabalint.github.io:8081/api/deleteuser';
     formData.append('id_user', rowId);
 
     //convert data to json
@@ -222,7 +222,7 @@ function  reset_password(rowId){
 
 
     var formData = new FormData();
-    const url = 'http://localhost:8081/api/adminresetpassword';
+    const url = 'https://elizabalint.github.io:8081/api/adminresetpassword';
     formData.append('id_user', rowId);
 
     //convert data to json

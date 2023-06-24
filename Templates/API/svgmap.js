@@ -85,7 +85,7 @@ function loadAndModifyMapColors() {
 
       // We need to use the session
       var formData = new FormData();
-      const url = 'http://localhost:8081/api/mapcolors';
+      const url = 'https://elizabalint.github.io:8081/api/mapcolors';
       formData.append('session', document.cookie);
 
       // Convert data to JSON

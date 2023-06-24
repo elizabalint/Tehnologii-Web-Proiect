@@ -1,7 +1,7 @@
 
 // API endpoints
-const url = 'http://localhost:8081/api/session';
-const url2 = 'http://localhost:8081/api/deletesession';
+const url = 'https://elizabalint.github.io:8081/api/session';
+const url2 = 'https://elizabalint.github.io:8081/api/deletesession';
 
 // Verify the session
 if (document.cookie) {

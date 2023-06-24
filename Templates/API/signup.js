@@ -20,7 +20,7 @@ if(signupForm ) {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(signupForm);
-    const url = 'http://localhost:8081/api/signup'; // API URL
+    const url = 'https://elizabalint.github.io:8081/api/signup'; // API URL
   
 
 
