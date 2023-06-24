@@ -34,42 +34,44 @@ public class SessionsDAO {
     }
 
     public Session findByUser(int id_user) throws SQLException {
-
-        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM sessions WHERE id_user='" + id_user + "'")) {
-
-            if (rs.next()) {
-                Session session = new Session(rs.getString(1), rs.getInt(2));
-                return session;
+        String query = "SELECT * FROM sessions WHERE id_user = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, id_user);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Session session = new Session(rs.getString(1), rs.getInt(2));
+                    return session;
+                }
             }
         }
         return null;
-
     }
 
     public Session findBySession(String id_session) throws SQLException {
-
-        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM sessions WHERE id_session='" + id_session + "'")) {
-
-            if (rs.next()) {
-                Session session = new Session(rs.getString(1), rs.getInt(2));
-                return session;
+        String query = "SELECT * FROM sessions WHERE id_session = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, id_session);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Session session = new Session(rs.getString(1), rs.getInt(2));
+                    return session;
+                }
             }
         }
         return null;
     }
 
     public Boolean SessionExists(String id_session) throws SQLException {
-
-        try (Connection con = Connection_Database.getConnection()) {
-
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select COUNT(*) from sessions where id_session='" + id_session + "'")) {
-
-                //con.close();
-                return rs.getInt(1) != 0;
-
+        String query = "SELECT COUNT(*) FROM sessions WHERE id_session = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, id_session);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) != 0;
+                }
             }
         }
+        return false;
     }
 
     public void delete(String id_session) throws SQLException {

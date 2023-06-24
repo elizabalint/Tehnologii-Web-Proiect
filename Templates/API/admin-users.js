@@ -41,7 +41,7 @@ function displayTableData() {
     elementTable.innerHTML = '';
 
     // Create table headers
-    const headers = ['ID', 'Username', 'Password', 'Admin','Delete'];
+    const headers = ['ID', 'Username', 'Password', 'Admin', 'Reset wanted' ,'Reset','Delete'];
     const headerRow = document.createElement('tr');
     headers.forEach(headerText => {
         const headerCell = document.createElement('th');
@@ -54,6 +54,7 @@ function displayTableData() {
 
     // Loop through the table data and create table rows
     tableData.forEach(item => {
+      
         const row = document.createElement('tr');
 
         // Create table cells for each attribute
@@ -70,10 +71,34 @@ function displayTableData() {
         row.appendChild(passwordCell);
 
         const adminCell = document.createElement('td');
-        adminCell.textContent = item.admin ? 'Yes' : 'No';
+        adminCell.textContent = (item.admin ==='true') ? 'Yes' : 'No';
         row.appendChild(adminCell);
 
+        const reset_passwordCell = document.createElement('td');
+        reset_passwordCell.textContent = (item.reset_password ==='true') ? 'Yes' : 'No';
+        // reset_passwordCell.style.left='10px';
+        row.appendChild(reset_passwordCell);
+     
+        //Create reset user button
+        const resetbuttonCell = document.createElement('td'); // Create a new table cell for the button column
 
+        if (item.reset_password === 'true') {
+          const resetbutton = document.createElement('button');
+          resetbutton.textContent = 'Reset';
+          resetbutton.classList.add('delete-button');
+          resetbutton.style.padding = '10px 20px'; 
+          resetbutton.style.fontSize = '13px'; 
+          resetbutton.addEventListener('click',function(){
+            reset_password(item.id);
+            resetbutton.remove();
+          });
+
+          resetbuttonCell.appendChild(resetbutton);
+        }
+        
+        row.appendChild(resetbuttonCell);
+
+       
         // Create delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
@@ -145,19 +170,48 @@ function deleteTableRow(rowId) {
     });
     var jsonPayload = JSON.stringify(jsonData);
    
-    //get the nr from the server
+    //delete the user
     fetch(url, {
         method: 'POST',
-        body: jsonPayload,
+        body: jsonPayload
     })
       .then(response => response.json())
       .then(data => {
        
-        console.log(data);
+        // console.log(data);
       })
       .catch(error => {
         console.error('Error:', error);
       });
   
+}
+
+//Reset the password for the selected user
+function  reset_password(rowId){
+
+
+    var formData = new FormData();
+    const url = 'http://localhost:8081/api/adminresetpassword';
+    formData.append('id_user', rowId);
+
+    //convert data to json
+    var jsonData = {};
+    formData.forEach(function (value, key) {
+        jsonData[key] = value;
+    });
+    var jsonPayload = JSON.stringify(jsonData);
+   
+    //delete the user
+    fetch(url, {
+        method: 'POST',
+        body: jsonPayload
+    })
+      .then(response => response.json())
+      .then(data => {
+    
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 }
 

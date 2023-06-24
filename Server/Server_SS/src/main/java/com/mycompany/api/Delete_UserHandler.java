@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author ignat
@@ -29,10 +28,10 @@ public class Delete_UserHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
-        HandlerCommander hc = new HandlerCommander();
+      HandlerCommander hc = new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
-
+       
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
@@ -58,11 +57,12 @@ public class Delete_UserHandler implements HttpHandler {
                 UsersDAO u = new UsersDAO();
                 //delete user
                 u.delete_by_ID(user);
-                
+
                 //delete data associated with the user
-                VisitedCountriesDAO v= new VisitedCountriesDAO();
+                VisitedCountriesDAO v = new VisitedCountriesDAO();
                 v.deleteAll(user);
-                
+                 hc.sendResponse(exchange, "true", "User deleted", 200);
+
             } catch (SQLException ex) {
                 System.out.println(ex);
             }

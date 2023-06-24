@@ -426,7 +426,7 @@ li a:hover {
 
   position: static;
   margin: auto;
-  width:50%;
+  width:1000px;
   justify-content:center;
   word-wrap: break-word;
   overflow: hidden;
@@ -453,7 +453,7 @@ table.element-list{
 table.element-list th,
 table.element-list td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 

@@ -276,6 +276,14 @@ label span.text-checkbox::before {
 
 }
 
+.box_menu_2 .container h4 {
+  font-size: 4vmax;
+  line-height: 1;
+  color: black;
+  margin-bottom: 20%;
+
+}
+
 .box_menu_2 .container p {
   font-size: 20px;
   color: black;

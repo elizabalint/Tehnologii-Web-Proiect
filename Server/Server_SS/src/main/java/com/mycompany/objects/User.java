@@ -11,7 +11,7 @@ package com.mycompany.objects;
 public class User {
 
     private int id;
-    private String username, password,admin;
+    private String username, password,admin,reset_password,new_password;
 
     public User() {
     }
@@ -28,6 +28,24 @@ public class User {
         this.password = password;
         this.admin = admin;
     }
+
+    public User(int id, String username, String password, String admin, String reset_password, String new_password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+        this.reset_password = reset_password;
+        this.new_password = new_password;
+    }
+
+    public String getNew_password() {
+        return new_password;
+    }
+    
+    public String getReset_password() {
+        return reset_password;
+    }
+    
 
     public String getAdmin() {
         return admin;
