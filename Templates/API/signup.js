@@ -32,18 +32,20 @@ if(signupForm ) {
       .then(data => {
         
         if (data.success) {
-            // If login was successful          
+            // If signup was successful          
             
-            document.cookie = "session="+data.message; 
-           // alert(document.cookie);          
-            //location.replace("General.html");
+            //create cookie
+            var expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 1);
+            document.cookie = "session=" + data.message + "; expires=" + expirationDate.toUTCString();
+
+            //redirect
             window.location.href = "General.html";
-            //console.log(data.message);
           
           } else {
-            // If login failed
+            // If signup failed
             
-            console.log('Login failed');
+            console.log('SignUp failed');
             console.log('Error message:', data.message);
             showErrorWithTimeout(data.message, 3000);
           }

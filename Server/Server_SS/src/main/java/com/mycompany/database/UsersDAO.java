@@ -30,34 +30,72 @@ public class UsersDAO {
 
     }
 
-    public User findByUsername(String username) throws SQLException {
+    public void updaterequest(String username, String password) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select * from users where username='" + username + "'")) {
 
-                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-                //con.close();
-                return user;
-
+            try (PreparedStatement pstmt = con.prepareStatement(
+                    "UPDATE users SET new_password = ?, reset_password = 'true' WHERE username = ?")) {
+                pstmt.setString(1, password);
+                pstmt.setString(2, username);
+                pstmt.executeUpdate();
             }
+            con.commit();
+            con.close();
+
         }
 
     }
-
-    public User findByID(int id) throws SQLException {
+    
+        public void updatepassword(int id,String password) throws SQLException {
 
         try (Connection con = Connection_Database.getConnection()) {
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select * from users where id='" + id + "'")) {
 
-                User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-                //con.close();
-                return user;
-
+            try (PreparedStatement pstmt = con.prepareStatement(
+                    "UPDATE users SET password = ?, reset_password = 'false' WHERE id = ?")) {
+                pstmt.setString(1, password);
+                pstmt.setInt(2, id);
+                pstmt.executeUpdate();
             }
+            con.commit();
+            con.close();
+
         }
 
+    }
+    
+    
+
+    public User findByUsername(String username) throws SQLException {
+        try (Connection con = Connection_Database.getConnection()) {
+            String query = "SELECT * FROM users WHERE username = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+                pstmt.setString(1, username);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                        return user;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public User findByID(int id) throws SQLException {
+        try (Connection con = Connection_Database.getConnection()) {
+            String query = "SELECT * FROM users WHERE id = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+                pstmt.setInt(1, id);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                        return user;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public List<User> findAllUsers() throws SQLException {
@@ -71,8 +109,10 @@ public class UsersDAO {
                     String name = rs.getString("username");
                     String password = rs.getString("password");
                     String admin = rs.getString("admin");
+                    String reset_password = rs.getString("reset_password");
+                    String new_password = rs.getString("new_password");
 
-                    User user = new User(id, name, password, admin);
+                    User user = new User(id, name, password, admin, reset_password, new_password);
                     userList.add(user);
                 }
             }
@@ -82,18 +122,20 @@ public class UsersDAO {
 
     }
 
-    public Boolean UsernameExists(String username) throws SQLException {
-
+    public boolean UsernameExists(String username) throws SQLException {
         try (Connection con = Connection_Database.getConnection()) {
-
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select COUNT(*) from users where username='" + username + "'")) {
-
-                //con.close();
-                return rs.getInt(1) != 0;
-
+            String query = "SELECT COUNT(*) FROM users WHERE username = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(query)) {
+                pstmt.setString(1, username);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        int count = rs.getInt(1);
+                        return count != 0;
+                    }
+                }
             }
         }
+        return false;
     }
 
     public void delete(String username) throws SQLException {

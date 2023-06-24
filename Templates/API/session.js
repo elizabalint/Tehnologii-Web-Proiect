@@ -13,10 +13,10 @@ if (document.cookie) {
         .then(data => {
 
             if (data.success) {
-                console.log(data);
+                // console.log(data);
                 if (document.title === "Admin") {
-                if(data.admin !== true) location.replace("Home.html");
-                }              
+                    if (data.admin !== true) location.replace("Home.html");
+                }
             }
             else {
                 location.replace("Home.html");
@@ -40,30 +40,33 @@ logoutLink.addEventListener("click", function (event) {
     fetch(url2, {
         method: 'POST',
         body: document.cookie
+        
     })
         .then(response => response.json())
         .then(data => {
 
-            console.log(data);
+            // console.log(data);
+
+            //delete the cookie
+            var x = document.cookie;
+            document.cookie = x + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+
+
+            // redirect to login page
+            var currentPage = window.location.pathname;
+            var pathParts = currentPage.split("/");
+            var lastPart = pathParts[pathParts.length - 1];
+
+            if (lastPart === "Souvenir_personalised.html" || lastPart === "Souvenir_general.html") {
+                window.location.href = "../Home.html";
+            }
+
+            else { window.location.href = "Home.html"; }
+
         })
         .catch(error => {
             console.error('Error:', error);
         });
 
-  //delete the cookie
-  var x=document.cookie;
-  document.cookie = x + ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-
-
-    // send to login page
-    var currentPage = window.location.pathname;
-    var pathParts = currentPage.split("/");
-    var lastPart = pathParts[pathParts.length - 1];
-    //console.log(lastPart);
-
-    if (lastPart === "Souvenir_personalised.html" || lastPart === "Souvenir_general.html" ){
-        window.location.href = "../Home.html";
-    }
-
-    else {window.location.href = "Home.html";}
 });
+

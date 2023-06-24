@@ -4,8 +4,11 @@
  */
 package com.mycompany.api;
 
-import com.mycompany.database.SessionsDAO;
-import com.mycompany.objects.Session;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mycompany.database.UsersDAO;
+import com.mycompany.database.VisitedCountriesDAO;
+import com.mycompany.objects.User;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.BufferedReader;
@@ -13,23 +16,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author ignat
  */
-public class DeleteSessionHandler implements HttpHandler {
+public class AdminResetPasswordHandler implements HttpHandler{
 
-    public DeleteSessionHandler() {
+    public AdminResetPasswordHandler() {
     }
-
-    @Override
+    
+     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        HandlerCommander hc = new HandlerCommander();
+
+      HandlerCommander hc = new HandlerCommander();
         // Set CORS headers
         hc.setCORS(exchange);
-
-
+       
         if ("POST".equals(exchange.getRequestMethod())) {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
@@ -43,15 +47,19 @@ public class DeleteSessionHandler implements HttpHandler {
 
             //extract the session id
             String request = requestBody.toString();
-            int equalsIndex = request.indexOf("=");
-            String id_session = request.substring(equalsIndex + 1);
-            // System.out.println(id_session);
 
-            //Delete the sessions
-            SessionsDAO s = new SessionsDAO();
+            // Retrieve the value the id_user from the JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonrequest = objectMapper.readTree(request);
+            String id_user = jsonrequest.get("id_user").asText();
+
+            int user = Integer.parseInt(id_user);
+
             try {
-                s.delete(id_session);
-                hc.sendResponse(exchange, "true", "Deleted succesfully", 200);
+                UsersDAO u = new UsersDAO();
+                User userul=u.findByID(user);
+                u.updatepassword(user, userul.getNew_password());
+                hc.sendResponse(exchange, "true", "Password reseted", 200);
 
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -63,5 +71,6 @@ public class DeleteSessionHandler implements HttpHandler {
 
         hc.closeconnection();
     }
-
+    
+    
 }

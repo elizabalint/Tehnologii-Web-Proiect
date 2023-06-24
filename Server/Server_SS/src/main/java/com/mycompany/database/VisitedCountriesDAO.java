@@ -34,42 +34,44 @@ public class VisitedCountriesDAO {
     }
 
     public boolean AssociationExists(int id_user, int id_country) throws SQLException {
-        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM visited_user_countries WHERE id_user='" + id_user + "' AND id_country='" + id_country + "'")) {
-
-            if (rs.next()) {
-                return rs.getInt(1) != 0;
+        String query = "SELECT COUNT(*) FROM visited_user_countries WHERE id_user = ? AND id_country = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, id_user);
+            pstmt.setInt(2, id_country);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) != 0;
+                }
             }
         }
-
         return false;
     }
 
     public Integer NumberOfAssociations(int id_user) throws SQLException {
-
-        try (Connection con = Connection_Database.getConnection()) {
-
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select COUNT(*) from visited_user_countries where id_user='" + id_user + "'")) {
-
-                return rs.getInt(1);
-
+        String query = "SELECT COUNT(*) FROM visited_user_countries WHERE id_user = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, id_user);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
             }
         }
+        return 0;
     }
 
     public List<Integer> AllVisitedCountries(int id_user) throws SQLException {
-
-        List<Integer> idCountries= new ArrayList<>();
-
-        try (Connection con = Connection_Database.getConnection(); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                "SELECT id_country FROM visited_user_countries WHERE id_user='" + id_user + "'")) {
-
-            while (rs.next()) {
-                int idCountry = rs.getInt("id_country");
-                idCountries.add(idCountry);
+        List<Integer> idCountries = new ArrayList<>();
+        String query = "SELECT id_country FROM visited_user_countries WHERE id_user = ?";
+        try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, id_user);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    int idCountry = rs.getInt("id_country");
+                    idCountries.add(idCountry);
+                }
             }
         }
-
         return idCountries;
     }
 

@@ -44,7 +44,7 @@ if (loginForm) {
         if (data.success) {
           // If login was successful  
 
-         // Check if the "Remember me" checkbox is checked
+          // Check if the "Remember me" checkbox is checked
           if (rememberCheckbox.checked) {
             // Store the username and the "remembered" flag in localStorage
             localStorage.setItem('rememberedUsername', username);
@@ -58,12 +58,15 @@ if (loginForm) {
           }
 
           //create session cookie and go to general.html page
-          document.cookie = "session=" + data.message;
-       
-          if (data.admin === true)  window.location.href = "AdminPage.html";
+          var expirationDate = new Date();
+          expirationDate.setDate(expirationDate.getDate() + 1);
+          document.cookie = "session=" + data.message + "; expires=" + expirationDate.toUTCString();
+
+          //redirect according to the admin value
+          if (data.admin === true) window.location.href = "AdminPage.html";
           else window.location.href = "General.html";
-         
-        
+
+
 
         } else {
           // If login failed
@@ -83,5 +86,4 @@ if (loginForm) {
 
   // loginForm.reset();
 }
-
 
