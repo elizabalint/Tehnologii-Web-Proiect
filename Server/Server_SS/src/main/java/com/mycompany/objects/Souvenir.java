@@ -9,13 +9,13 @@ package com.mycompany.objects;
  * @author eliza
  */
 public class Souvenir {
-    private int id, id_country, age, popularity;
-    private String name, country, period, gender,buy;
+    private int id, id_country, popularity;
+    private String name, country, age, period, gender,buy;
 
     public Souvenir() {
     }
     
-    public Souvenir(int id,  String name, int id_country, String country, String period, String gender, int age, int popularity, String buy) {
+    public Souvenir(int id,  String name, int id_country, String country, String period, String gender, String age, int popularity, String buy) {
         this.id = id;
         this.id_country = id_country;
         this.country=country;
@@ -40,7 +40,7 @@ public class Souvenir {
         return id_country;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 

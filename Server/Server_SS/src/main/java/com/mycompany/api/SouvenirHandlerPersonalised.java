@@ -51,23 +51,32 @@ public class SouvenirHandlerPersonalised implements HttpHandler{
             }
             
             String request = requestBody.toString();
-
-            //ia sesiunea userului conectat
+            System.out.println(request);
+            //take teh curent request
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonrequest = objectMapper.readTree(request);
-            System.out.println("sdfgh");
             
-
+            JsonNode searches = objectMapper.readTree(request);
+            //verify if there is a search request. if exists, then extract the search
+            Boolean bool = searches.has("search");
+            if(bool){
+            String search =searches.get("search").asText();
+            int equalsIndexs = search.indexOf(":");
+            String se = search.substring(equalsIndexs + 1);
+            System.out.println(search);
+            }
+            //take the curent session
             String sessionx = jsonrequest.get("session").asText();
             int equalsIndex = sessionx.indexOf("=");
             String session = sessionx.substring(equalsIndex + 1);
-            System.out.println(session);
-            System.out.println("brvecd");
+           System.out.println(session);
+            //if no search, get all souvenirs from all of the countries the curent user visited
+            if(!bool)
+            {
             try{
                 //get session user
                 SessionsDAO s = new SessionsDAO();
                 Session sesiune = s.findBySession(session);
-                System.out.println("bgvfdc");
                 
                 List<Souvenir> souvenirs = new ArrayList<>();
                 VisitedCountriesDAO visited = new VisitedCountriesDAO();
@@ -103,7 +112,66 @@ public class SouvenirHandlerPersonalised implements HttpHandler{
             }catch (SQLException ex) {
                 System.out.println(ex);
             }
-            
+     }
+            else{//get the couvenirs searched
+                try{
+            //get session user
+                List<Souvenir> all= new ArrayList<>();
+                SouvenirDAO souve = new SouvenirDAO();
+                SessionsDAO s = new SessionsDAO();
+                Session sesiune = s.findBySession(session);
+                
+                JsonNode a = objectMapper.readTree(request);
+                System.out.println(request);
+                String b = a.get("search").asText();
+                int c = b.indexOf(":");
+                String d = b.substring(c + 1);
+                //countries user visited
+                List<Souvenir> souvenirs = new ArrayList<>();
+                VisitedCountriesDAO visited = new VisitedCountriesDAO();
+                List<Integer> vis = new ArrayList<>();
+                
+                vis = visited.AllVisitedCountries(sesiune.getId_user());
+                SouvenirDAO so = new SouvenirDAO();
+                List<Souvenir> allSouvenirs = new ArrayList<>();
+                
+                
+                all = souve.performSearch(d);
+                System.out.println(d);
+                
+                //all souvenirs from the countries you have been
+                
+                    List<Souvenir> countrySouvenir = new ArrayList<>();
+                    //all the souvenirs found afer search
+                    countrySouvenir = so.performSearch(d);
+                    
+                    for(Integer i :vis)
+                        for( Souvenir j : countrySouvenir)
+                              if( i == j.getId_country())
+                                    allSouvenirs.add(j);
+                
+                System.out.println(vis);
+                //Send data to the js
+                // Create a JSON object to hold the variable assignments
+                ObjectNode rootNode = objectMapper.createObjectNode();
+                rootNode.put("allSouvenirsUser", objectMapper.writeValueAsString(allSouvenirs));
+               
+                // Convert the JSON object to a string
+                String jsonData = objectMapper.writeValueAsString(allSouvenirs);
+
+                // Set the response headers
+                exchange.getResponseHeaders().set("Content-Type", "application/javascript");
+                exchange.sendResponseHeaders(200, jsonData.getBytes().length);
+
+                // Write the JSON data to the response
+                OutputStream outputStream = exchange.getResponseBody();
+                outputStream.write(jsonData.getBytes());
+                outputStream.close();
+                }
+                catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            }
         } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }

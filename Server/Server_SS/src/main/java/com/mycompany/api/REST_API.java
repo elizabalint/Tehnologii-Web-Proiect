@@ -25,7 +25,6 @@ public class REST_API {
     server.createContext("/api/resetpassword", (HttpHandler) new ResetPasswordHandler());
     server.createContext("/api/adminresetpassword", (HttpHandler) new AdminResetPasswordHandler());
     server.createContext("/api/souvenirg", (HttpHandler) new SouvenirHandlerGeneral());
-    server.createContext("/api/souvenir", (HttpHandler) new SouvenirHandler());
     server.createContext("/api/table_souvenirs", (HttpHandler) new Table_SouvenirsHandler());
     server.createContext("/api/souvenirp", (HttpHandler) new SouvenirHandlerPersonalised());
     }

@@ -51,14 +51,11 @@ public class SouvenirHandlerGeneral implements HttpHandler{
             
             String request = requestBody.toString();
 
-    
-            System.out.println("brvecd");
-            
             if(request.isEmpty())
             {
             try {
                 //get session user
-                System.out.println("bgvfdc");
+                
                 List<Souvenir> all= new ArrayList<>();
                 SouvenirDAO s = new SouvenirDAO();
                 all=s.getAllSouvenirs();
@@ -80,18 +77,21 @@ public class SouvenirHandlerGeneral implements HttpHandler{
             }
 }       else{
             
-                //get session user
-                System.out.println("bgvfdc");
+               
                 List<Souvenir> all= new ArrayList<>();
                 SouvenirDAO s = new SouvenirDAO();
+                
                  ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonrequest = objectMapper.readTree(request);
                 String search = jsonrequest.get("search").asText();
                 int equalsIndex = search.indexOf(":");
                 String se = search.substring(equalsIndex + 1);
+                
                 all = s.performSearch(se);
-                //if(all.isEmpty())
-                   // hc.sendResponse(exchange, "false", "Doesn't exist", 200);
+                
+                if(all.isEmpty())
+                    hc.sendResponse(exchange, "false", "Doesn't exist", 200);
+                else{
                 // Convert the JSON object to a string
                 ObjectMapper objectMappers = new ObjectMapper();
                 String jsonData = objectMappers.writeValueAsString(all);
@@ -106,10 +106,11 @@ public class SouvenirHandlerGeneral implements HttpHandler{
                 outputStream.close();
         
             }
-             
+            }
         } else {
             hc.sendResponse(exchange, "false", "Invalid request method", 405);
         }
+        
         hc.closeconnection();
 
     }

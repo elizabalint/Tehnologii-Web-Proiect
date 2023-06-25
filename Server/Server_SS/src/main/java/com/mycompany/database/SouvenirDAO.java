@@ -36,7 +36,7 @@ public class SouvenirDAO {
                     String country=rs.getString("country");
                     String period = rs.getString("period");
                     String gender = rs.getString("gender");
-                    int age = rs.getInt("age");
+                    String age = rs.getString("age");
                     int popularity = rs.getInt("popularity");
                     String buy = rs.getString("buy");
 
@@ -61,7 +61,7 @@ public class SouvenirDAO {
                 String country = rs.getString("country");
                 String period = rs.getString("period");
                 String gender = rs.getString("gender");
-                int age = rs.getInt("age");
+                String age = rs.getString("age");
                 int popularity = rs.getInt("popularity");
                 String buy = rs.getString("buy");
 
@@ -85,7 +85,7 @@ public class SouvenirDAO {
                 int idCountry = rs.getInt("id_country");
                 String period = rs.getString("period");
                 String gender = rs.getString("gender");
-                int age = rs.getInt("age");
+                String age = rs.getString("age");
                 int popularity = rs.getInt("popularity");
                 String buy = rs.getString("buy");
 
@@ -109,7 +109,7 @@ public class SouvenirDAO {
                     int idCountry = rs.getInt("id_country");
                     String country=rs.getString("country");
                     String gender = rs.getString("gender");
-                    int age = rs.getInt("age");
+                    String age = rs.getString("age");
                     int popularity = rs.getInt("popularity");
                     String buy = rs.getString("buy");
 
@@ -133,7 +133,7 @@ public class SouvenirDAO {
                     int idCountry = rs.getInt("id_country");
                     String country = rs.getString("country");
                     String period = rs.getString("period");
-                    int age = rs.getInt("age");
+                    String age = rs.getString("age");
                     int popularity = rs.getInt("popularity");
                     String buy = rs.getString("buy");
 
@@ -143,12 +143,12 @@ public class SouvenirDAO {
     }}
         return results;
     }
-    public static List<Souvenir> findByAge(int age) throws SQLException {
+    public static List<Souvenir> findByAge(String age) throws SQLException {
         List<Souvenir> results = new ArrayList<>();
         try (Connection con = Connection_Database.getConnection();
          PreparedStatement stmt = con.prepareStatement("SELECT souvenirs.id, souvenirs.name, souvenirs.id_country, countries.name AS country, souvenirs.period, souvenirs.gender, souvenirs.age, souvenirs.popularity, souvenirs.buy FROM souvenirs JOIN countries ON countries.id = souvenirs.id_country WHERE souvenirs.age = ?")) {
         
-        stmt.setInt(1, age);
+        stmt.setString(1, age);
         try (ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                     int id = rs.getInt("id");
@@ -180,7 +180,7 @@ public class SouvenirDAO {
                 String country = rs.getString("country");
                 String period = rs.getString("period");
                 String gender = rs.getString("gender");
-                int age = rs.getInt("age");
+                String age = rs.getString("age");
                 int popularity = rs.getInt("popularity");
                 String buy = rs.getString("buy");
 
@@ -192,19 +192,19 @@ public class SouvenirDAO {
     return souvenirs;
    
 }
-     public Boolean SouvenirExists(String name) throws SQLException {
-
-        try (Connection con = Connection_Database.getConnection()) {
-
-            try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(
-                    "select COUNT(*) from souvenirs where name='" + name + "'")) {
-
-                
-                return rs.getInt(1) != 0;
-
+     public Souvenir SouvenirExists(String text) throws SQLException {
+            String query = "SELECT souvenirs.id, souvenirs.name, souvenirs.id_country, countries.name AS country, souvenirs.period, souvenirs.gender, souvenirs.age, souvenirs.popularity, souvenirs.buy FROM souvenirs JOIN countries ON countries.id = souvenirs.id_country WHERE souvenirs.name ='" + text + "' or souvenirs.period='" + text + "' or souvenirs.gender='" + text + "' or souvenirs.age='" + text + "'" ;
+                try (Connection con = Connection_Database.getConnection(); PreparedStatement pstmt = con.prepareStatement(query)) {
+                 pstmt.setString(1, text);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                            Souvenir souvenir = new Souvenir(rs.getInt("id"), rs.getString("name"), rs.getInt("id_country"), rs.getString("country") ,rs.getString("period"), rs.getString("gender"), rs.getString("age"), rs.getInt("popularity"), rs.getString("buy"));
+                       return souvenir;
             }
         }
     }
+    return null;
+}
      public List<Souvenir> performSearch(String query) throws IOException {
         List<Souvenir> searchResults = new ArrayList<>();
      try {
@@ -222,19 +222,9 @@ public class SouvenirDAO {
         List<Souvenir> genderResults = SouvenirDAO.findByGender(query);
         searchResults.addAll(genderResults);
         
-        try {
-            // Search after age (converting the query to int)
-            int age = Integer.parseInt(query);
-            List<Souvenir> ageResults = SouvenirDAO.findByAge(age);
-            searchResults.addAll(ageResults);
-        } catch (NumberFormatException e) {
-            // Ignore the exception if the query cannot be parsed as an integer
-        }
+         List<Souvenir> ageResults = SouvenirDAO.findByAge(query);
+        searchResults.addAll(ageResults);
         
-        if (searchResults.isEmpty()) {
-            // No search results found
-            throw new SQLException("No result found");
-        }
     } catch (SQLException e) {
         // Error occurred during the search
         e.printStackTrace();
