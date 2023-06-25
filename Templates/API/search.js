@@ -1,4 +1,4 @@
-const url1 = 'https://elizabalint.github.io:8081/api/souvenirg'; // API URL
+const url1 = 'http://localhost:8081/api/souvenirg'; // API URL
 
 function loadSouvenirs() {
   fetch(url1, {
@@ -22,7 +22,7 @@ const container = document.querySelector('.souvenir');
       container.innerHTML = ' ';
       data.forEach(item => {
         const country = item.country;
-        const souvenir = { name: item.name, period: item.period, link: item.buy }; 
+        const souvenir = { name: item.name, period: item.period, gender: item.gender, age:item.age,link: item.buy }; 
       
         if (countryTableMap.has(country)) {
           // Tabel already exists
@@ -39,9 +39,14 @@ const container = document.querySelector('.souvenir');
           
           const td2 = document.createElement('td');
           td2.textContent = souvenir.period;
-      
+          const td3 = document.createElement('td');
+          td3.textContent = souvenir.gender;
+          const td4 = document.createElement('td');
+          td4.textContent = souvenir.age;
           tableRow.appendChild(td1);
           tableRow.appendChild(td2);
+          tableRow.appendChild(td3);
+          tableRow.appendChild(td4);
           table.appendChild(tableRow);
         } else {
           // The table doesn't exist
@@ -57,9 +62,14 @@ const container = document.querySelector('.souvenir');
           th1.textContent = 'Souvenir name';
           const th2 = document.createElement('th');
           th2.textContent = 'Period';
-      
+          const th3 = document.createElement('th');
+          th3.textContent = 'Gender';
+          const th4 = document.createElement('th');
+          th4.textContent = 'Age';
           tableHeader.appendChild(th1);
           tableHeader.appendChild(th2);
+          tableHeader.appendChild(th3);
+          tableHeader.appendChild(th4);
           table.appendChild(tableHeader);
       
           const tableRow = document.createElement('tr');
@@ -73,9 +83,14 @@ const container = document.querySelector('.souvenir');
           
           const td2 = document.createElement('td');
           td2.textContent = souvenir.period;
-      
+          const td3 = document.createElement('td');
+          td3.textContent = souvenir.gender;
+          const td4 = document.createElement('td');
+          td4.textContent = souvenir.age;
           tableRow.appendChild(td1);
           tableRow.appendChild(td2);
+          tableRow.appendChild(td3);
+          tableRow.appendChild(td4);
           table.appendChild(tableRow);
       
           div.appendChild(h1);
@@ -87,6 +102,8 @@ const container = document.querySelector('.souvenir');
         }
       });
     }
+     //errors
+ 
 const searchButton = document.getElementById('searchButton');
   document.querySelector('.search-bar').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -111,7 +128,8 @@ const searchButton = document.getElementById('searchButton');
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      displaySouvenirs(data);
+    
+        displaySouvenirs(data);
       
     
 })

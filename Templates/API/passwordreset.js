@@ -24,7 +24,7 @@ function showErrorWithTimeout(message, timeout, _colour) {
       event.preventDefault(); // Prevent the default form submission
   
       const formData = new FormData(resetForm );
-      const url = 'https://elizabalint.github.io:8081/api/resetpassword'; // API URL
+      const url = 'http://localhost:8081/api/resetpassword'; // API URL
     
   
   

@@ -9,6 +9,7 @@ const nextButton = document.getElementById('next-button');
 
 // Variables for managing pagination
 let currentPage = 1;
+let currentPageS = 1;
 const rowsPerPage = 10;
 let userData = [];
 let souvenirData = [];
@@ -16,7 +17,7 @@ let souvenirData = [];
 // User Table
 usersButton.addEventListener('click', function () {
     tableTypeSpan.textContent = 'Users';
-    const url = 'https://elizabalint.github.io:8081/api/table_users';
+    const url = 'http://localhost:8081/api/table_users';
 
     fetch(url, {
         method: 'GET'
@@ -36,7 +37,7 @@ usersButton.addEventListener('click', function () {
 //Souvenir table
 souvenirsButton.addEventListener('click', function() {
   tableTypeSpan.textContent = 'Souvenirs';
-  const url = 'https://elizabalint.github.io:8081/api/table_souvenirs';
+  const url = 'http://localhost:8081/api/table_souvenirs';
 
   fetch(url, {
     method: 'GET'
@@ -45,7 +46,7 @@ souvenirsButton.addEventListener('click', function() {
   .then(data => {
     souvenirData = data;
     console.log(data);
-    currentPage = 1;
+    currentPageS = 1;
     displayTableDataS();
     updatePaginationButtons();
   })
@@ -76,6 +77,7 @@ function displayTableData() {
 
     // Loop through the table data and create table rows
     tableData.forEach(item => {
+      console.log(item);
       
         const row = document.createElement('tr');
 
@@ -141,39 +143,109 @@ function displayTableData() {
     // Show the table
     elementTable.style.display = 'table';
 }
+function displayTableDataS() {
+  const startIndexS = (currentPageS - 1) * rowsPerPage;
+  const endIndexS = startIndexS + rowsPerPage
+  const tableDataS = souvenirData.slice(startIndexS, endIndexS);
 
+  elementTable.innerHTML = '';
+  // Create table headers
+  const headers = ['ID', 'Name', 'ID_country', 'Period','Gender','Age','Where to buy'];
+  const headerRow = document.createElement('tr');
+  headers.forEach(headerText => {
+    const headerCell = document.createElement('th');
+    headerCell.textContent = headerText;
+    headerRow.appendChild(headerCell);
+  });
+
+  // Add the header row to the table
+  elementTable.appendChild(headerRow);
+
+  // Loop through the table data and create table rows
+  tableDataS.forEach(item => {
+    const row = document.createElement('tr');
+
+    // Create table cells for each attribute
+    const idCell = document.createElement('td');
+    idCell.textContent = item.id;
+    row.appendChild(idCell);
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = item.name;
+    row.appendChild(nameCell);
+
+    const IDCountryCell = document.createElement('td');
+    IDCountryCell.textContent = item.id_country;
+    row.appendChild(IDCountryCell);
+
+    const periodCell = document.createElement('td');
+    periodCell.textContent = item.period;
+    row.appendChild(periodCell);
+  
+    const genderCell = document.createElement('td');
+    genderCell.textContent = item.gender;
+    row.appendChild(genderCell);
+
+    const ageCell = document.createElement('td');
+    ageCell.textContent = item.age;
+    row.appendChild(ageCell);
+
+    const buyCell = document.createElement('a');
+    buyCell.href = item.buy;
+    buyCell.textContent = item.buy;
+    row.appendChild(buyCell);
+    // Add the row to the table body
+    elementTable.appendChild(row);
+  });
+
+// Show the table
+elementTable.style.display = 'table';
+}
 // When to stop the pagination of the buttons
 function updatePaginationButtons() {
-  if(tableTypeSpan.textContent = 'Users')
-  {
-  prevButton.disabled = currentPage === 1;
-  nextButton.disabled = currentPage === Math.ceil(userData.length / rowsPerPage);
+  if (tableTypeSpan.textContent === 'Users') {
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === Math.ceil(userData.length / rowsPerPage);
+  } else if (tableTypeSpan.textContent === 'Souvenirs') {
+    prevButton.disabled = currentPageS === 1;
+    nextButton.disabled = currentPageS === Math.ceil(souvenirData.length / rowsPerPage);
   }
-  else{
-   prevButton.disabled = currentPage === 1;
-   nextButton.disabled = currentPage === Math.ceil(souvenirData.length / rowsPerPage);
-
-  }
-
 }
 
 // Event listener for previous button
-prevButton.addEventListener('click', function () {
+prevButton.addEventListener('click', function() {
+  if (tableTypeSpan.textContent === 'Users') {
     if (currentPage > 1) {
-        currentPage--;
-        displayTableData();
-        updatePaginationButtons();
+      currentPage--;
+      displayTableData();
+      updatePaginationButtons();
     }
+  } else if (tableTypeSpan.textContent === 'Souvenirs') {
+    if (currentPageS > 1) {
+      currentPageS--;
+      displayTableDataS();
+      updatePaginationButtons();
+    }
+  }
 });
 
 // Event listener for next button
-nextButton.addEventListener('click', function () {
+nextButton.addEventListener('click', function() {
+  if (tableTypeSpan.textContent === 'Users') {
     const totalPages = Math.ceil(userData.length / rowsPerPage);
     if (currentPage < totalPages) {
-        currentPage++;
-        displayTableData();
-        updatePaginationButtons();
+      currentPage++;
+      displayTableData();
+      updatePaginationButtons();
     }
+  } else if (tableTypeSpan.textContent === 'Souvenirs') {
+    const totalPages = Math.ceil(souvenirData.length / rowsPerPage);
+    if (currentPageS < totalPages) {
+      currentPageS++;
+      displayTableDataS();
+      updatePaginationButtons();
+    }
+  }
 });
 
 //Delete the row and the information form the DB
@@ -191,7 +263,7 @@ function deleteTableRow(rowId) {
     //Delete form the DB
 
     var formData = new FormData();
-    const url = 'https://elizabalint.github.io:8081/api/deleteuser';
+    const url = 'http://localhost:8081/api/deleteuser';
     formData.append('id_user', rowId);
 
     //convert data to json
@@ -222,7 +294,7 @@ function  reset_password(rowId){
 
 
     var formData = new FormData();
-    const url = 'https://elizabalint.github.io:8081/api/adminresetpassword';
+    const url = 'http://localhost:8081/api/adminresetpassword';
     formData.append('id_user', rowId);
 
     //convert data to json

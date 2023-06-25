@@ -30,7 +30,7 @@ if (loginForm) {
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(loginForm);
-    const url = 'https://elizabalint.github.io:8081/api/login'; // API URL
+    const url = 'http://localhost:8081/api/login'; // API URL
     const username = usernameInput.value;
 
     fetch(url, {

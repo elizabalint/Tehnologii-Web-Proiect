@@ -3,7 +3,7 @@ function updateVisitedCountries() {
     const visitedCountriesElement = document.getElementById('visitedCountries');
     
     var formData = new FormData();
-    const url = 'https://elizabalint.github.io:8081/api/numberofcountries';
+    const url = 'http://localhost:8081/api/numberofcountries';
     formData.append('session', document.cookie);
 
     //convert data to json
@@ -61,8 +61,8 @@ document.querySelector('.search-bar').addEventListener('submit', function (event
     var url;
 
     //Add button
-    if (event.submitter === removeButton) url = 'https://elizabalint.github.io:8081/api/removecountry';
-    else if (event.submitter === addButton) url = 'https://elizabalint.github.io:8081/api/addcountry';
+    if (event.submitter === removeButton) url = 'http://localhost:8081/api/removecountry';
+    else if (event.submitter === addButton) url = 'http://localhost:8081/api/addcountry';
 
     //create data 
     var formData = new FormData();
@@ -85,7 +85,8 @@ document.querySelector('.search-bar').addEventListener('submit', function (event
         .then(data => {
 
             // console.log(data);
-            if(data.success)  {updateVisitedCountries();  showErrorWithTimeout(data.message, 2000,'green');}
+            if(data.success)  {
+              console.log(data.sucess);updateVisitedCountries();  showErrorWithTimeout(data.message, 2000,'green');}
             else showErrorWithTimeout(data.message, 2000,'red');
 
         })
